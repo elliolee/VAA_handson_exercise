@@ -4,16 +4,14 @@ project:
 website:
   title: "VAA_handson_exercise"
   navbar:
-    left:
+    right:
       - href: index.qmd
         text: Home
       - about.qmd
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
+    theme: morph
     css: styles.css
     toc: true
 
