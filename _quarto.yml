@@ -4,10 +4,13 @@ project:
 website:
   title: "VAA_handson_exercise"
   navbar:
-    right:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+    left: 
+      - icon: pencil-square
+        text: "Hands-on Exercise 1"
+        menu:
+          - text: "Hands-on Part 1"
+            href: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html"
+
 
 format:
   html:
@@ -16,4 +19,3 @@ format:
     toc: true
 
 editor: visual
-
