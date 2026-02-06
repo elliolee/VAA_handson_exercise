@@ -10,11 +10,11 @@ execute:
   freeze: true
 ---
 
-Learning Objectives:
+# 3.1 Learning Objectives:
 
--   Create interactive data visualisation by using functions provided by **ggiraph** and **plotlyr** packages
+In this hands-on exercise, you will learn how to create interactive data visualisation by using functions provided by **ggiraph** and **plotlyr** packages.
 
-# Getting Started
+# 3.2 Getting Started
 
 ## Installing and loading the required libraries
 
@@ -37,7 +37,7 @@ pacman::p_load(ggiraph, plotly,
                patchwork, DT, tidyverse)
 ```
 
-## Importing the Data
+# 3.3 Importing the Data
 
 -   The code chunk below imports *exam_data.csv* into R environment by using [*read_csv()*](https://readr.tidyverse.org/reference/read_delim.html) function of [**readr**](https://readr.tidyverse.org/) package.
 
@@ -57,7 +57,7 @@ exam_data <- read_csv("data/Exam_data.csv")
 
     -   The continuous attributes are: MATHS, ENGLISH and SCIENCE.
 
-# **Interactive Data Visualisation - ggiraph methods**
+# **3.4 Interactive Data Visualisation - ggiraph methods**
 
 [ggiraph](https://davidgohel.github.io/ggiraph/) is a html widget and a ggplot2 extension. It allows ggplot graphics to be interactive.
 
@@ -69,7 +69,7 @@ Interactive elements are made possible with [**ggplot geometries**](https://davi
 
 -   **Data_id**: a column of data-sets that contain an id to be associated with elements.
 
-## **Tooltip effect with *tooltip* aesthetic**
+## **3.4.1 Tooltip effect with *tooltip* aesthetic**
 
 Below shows a typical code chunk to plot an interactive statistical graph by using **ggiraph** package. 
 
@@ -119,7 +119,9 @@ girafe(
 ```
 :::
 
-## **Displaying multiple information on tooltip**
+Notice that two steps are involved. First, an interactive version of ggplot2 geom (i.e. geom_dotplot_interactive()) will be used to create the basic graph. Then, girafe() will be used to generate an svg object to be displayed on an html page.
+
+## **3.5.1 Displaying multiple information on tooltip**
 
 The first three lines of codes in the code chunk create a new field called *tooltip*. At the same time, it populates text in ID and CLASS fields into the newly created field. Next, this newly created field is used as tooltip field as shown in the code of line 7. By hovering the mouse pointer on an data point of interest, the student’s ID will be displayed.
 
@@ -175,7 +177,7 @@ girafe(
 ```
 :::
 
-## Customising Tooltop style
+## 3.6.1 Customising Tooltop style
 
 Code chunk below uses [`opts_tooltip()`](https://davidgohel.github.io/ggiraph/reference/opts_tooltip.html) of **ggiraph** to customize tooltip rendering by add css declarations.
 
@@ -242,7 +244,7 @@ girafe(
 For more customisations, refer to [Customizing girafe objects](https://davidgohel.github.io/ggiraph/articles/offcran/customizing.html)
 :::
 
-## **Displaying statistics on tooltip**
+## **3.6.2 Displaying statistics on tooltip**
 
 Code chunk below shows an advanced way to customise tooltip. In this example, a function is used to compute 90% confident interval of the mean. The derived statistics are then displayed in the tooltip.
 
@@ -310,7 +312,7 @@ girafe(ggobj = gg_point,
 ```
 :::
 
-## **Hover effect with *data_id* aesthetic**
+## **3.6.3 Hover effect with *data_id* aesthetic**
 
 Code chunk below shows the second interactive feature of ggiraph, namely `data_id`.
 
@@ -364,7 +366,7 @@ girafe(
 The default value of the hover css is *hover_css = “fill:orange;”*.
 :::
 
-## Styling hover effect
+## 3.6.4 Styling hover effect
 
 In the code chunk below, css codes are used to change the highlighting effect.
 
@@ -422,7 +424,7 @@ girafe(
 ```
 :::
 
-## Plot 1: **Combining tooltip and hover effect**
+## 3.6.5 **Combining tooltip and hover effect**
 
 The tooltip and hover effects are combined in the interactive statistical graph in the code chunk below.
 
@@ -482,7 +484,7 @@ girafe(
 ```
 :::
 
-## **Click effect with onclick**
+## **3.6.6 Click effect with onclick**
 
 `onclick` argument of ggiraph provides hotlink interactivity on the web. Web document link with a data object will be displayed on the web browser upon mouse click.
 
@@ -542,7 +544,7 @@ girafe(
 Click actions must be a string column in the dataset containing valid javascript instructions.
 :::
 
-## **Coordinated Multiple Views with ggiraph**
+## **3.6.7 Coordinated Multiple Views with ggiraph**
 
 When a data point of one of the dotplot is selected, the corresponding data point ID on the second data visualisation will be highlighted too.
 
@@ -630,7 +632,7 @@ girafe(code = print(p1 + p2),
 ```
 :::
 
-# **Interactive Data Visualisation - plotly methods!**
+# **3.7 Interactive Data Visualisation - plotly methods!**
 
 Plotly’s R graphing library create interactive web graphics from **ggplot2** graphs and/or a custom interface to the (MIT-licensed) JavaScript library [**plotly.js**](https://plotly.com/javascript/) inspired by the grammar of graphics. Different from other plotly platform, plot.R is free and open source.
 
@@ -640,7 +642,7 @@ Plotly’s R graphing library create interactive web graphics from **ggplot2** g
 
 -   by using *ggplotly()*
 
-## **Creating an interactive scatter plot: plot_ly() method**
+## **3.7.1 Creating an interactive scatter plot: plot_ly() method**
 
 The code chunk below shows an example a basic interactive plot created by using *plot_ly()*.
 
@@ -666,7 +668,7 @@ plot_ly(data = exam_data,
 ```
 :::
 
-## **Working with visual variable: plot_ly() method**
+## **3.7.2 Working with visual variable: plot_ly() method**
 
 In the code chunk below, *color* argument is mapped to a qualitative visual variable (i.e. RACE).
 
@@ -694,7 +696,7 @@ plot_ly(data = exam_data,
 ```
 :::
 
-## **Creating an interactive scatter plot: ggplotly() method**
+## **3.7.3 Creating an interactive scatter plot: ggplotly() method**
 
 The code chunk below plots an interactive scatter plot by using *ggplotly()*.
 
@@ -731,7 +733,7 @@ ggplotly(p)
 The only extra line you need to include in the code chunk is *ggplotly()*.
 :::
 
-## **Interactive Data Visualisation - crosstalk methods**
+## **3.8 Interactive Data Visualisation - crosstalk methods**
 
 [Crosstalk](https://rstudio.github.io/crosstalk/) is an add-on to the htmlwidgets package. It extends htmlwidgets with a set of classes, functions, and conventions for implementing cross-widget interactions (currently, linked brushing and filtering).
 
@@ -739,7 +741,7 @@ The only extra line you need to include in the code chunk is *ggplotly()*.
 DT::datatable(exam_data, class= "compact")
 ```
 
-## **Linked brushing: crosstalk method**
+## **3.8.1 Linked brushing: crosstalk method**
 
 Code chunk below is used to implement coordinated brushing.
 
