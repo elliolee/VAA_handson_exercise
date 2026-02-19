@@ -536,9 +536,9 @@ df2 <- df %>%
 ```
 :::
 
-## 2.4 EDA (quality checks aligned to the outcome-centric framing)
+## 3.4 EDA (quality checks aligned to the outcome-centric framing)
 
-### 2.4.1 Missingness overview (to assess reliability of downstream comparisons)
+### 3.4.1 Missingness overview (to assess reliability of downstream comparisons)
 
 A preliminary inspection shows negligible missingness across core variables (all \<1%), suggesting that downstream subgroup comparisons are unlikely to be biased by incomplete records.
 
