@@ -1,5 +1,21 @@
 ---
-title: "VAA_handson_exercise"
+title: "ISSS608 – Visual Analytics & Applications"
 ---
 
-welcome to **isss608 visual analytics** and applications homepage.
+About This Site
+
+Welcome to my course portfolio for ISSS608 Visual Analytics & Applications at Singapore Management University.
+
+This website documents my learning journey in visual analytics — from fundamental graphical principles to advanced analytical storytelling using R and interactive visualization tools.
+
+Throughout this course, I focus on transforming raw data into interpretable insights through:
+
+-   Exploratory Data Analysis (EDA)
+
+-   Statistical graphics design
+
+-   Interactive visualisation
+
+-   Analytical narrative construction
+
+-   Reproducible workflows in R & Quarto

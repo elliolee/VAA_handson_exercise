@@ -1,0 +1,1040 @@
+---
+title: "Take-home Exercise 1"
+subtitle: "Exploring Factors Associated with Student Learning Outcomes"
+author: "Ligen"
+date: "February 11, 2026"
+date-modified: last-modified
+format:
+  html:
+    theme: simplex
+    toc: true
+    toc-depth: 3
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+
+pacman::p_load(
+  tidyverse, readxl, janitor, skimr,
+  ggdist, ggridges, patchwork,
+  knitr, scales, stringr
+)
+
+```
+
+# 1. Overview
+
+## 1.1 Context & Analytical Framing
+
+University administrators increasingly rely on survey data to identify (i) which student groups face higher academic risk, (ii) what learning behaviours correlate with performance, and (iii) which institutional supports are most strongly associated with improved learning outcomes.
+
+This take-home exercise analyses a student survey dataset that captures multiple structural layers of student experience:
+
+-   Background characteristics: Year, Gender, Minority status, Policy support status, Poverty status
+
+-   Family socioeconomic proxies: Parents’ education and occupation
+
+-   Time allocation behaviours: Study time, social media time, time with friends
+
+-   Perceived learning environment: Adaptation to university, study methods, institutional support, facilities, lecturer quality, curriculum, competitive climate, peer influence
+
+The outcome variable is an ordinal GPA band, reflecting academic performance categories rather than continuous scores.
+
+Rather than conducting exhaustive exploratory analysis, this study adopts a structured analytical framing. The visualisations are organised to move from:
+
+1.  Baseline outcome distribution
+
+2.  Structural disparities (year, SES, minority)
+
+3.  Behavioural correlates
+
+4.  Institutional moderation
+
+5.  Engagement segmentation
+
+The emphasis is on truthful, interpretable visual encodings that support decision-relevant insights, while preserving the ordinal and structural nature of the data.
+
+## 1.2 Objectives
+
+This post aims to:
+
+1.  Establish the baseline distribution of GPA bands to understand overall performance concentration.
+
+2.  Examine whether structural characteristics (academic year and minority status) are associated with differences in GPA distribution.
+
+3.  Evaluate whether socioeconomic proxies (parents’ education) relate to GPA disparities.
+
+4.  Compare behavioural correlates of performance by examining study time versus social media time.
+
+5.  Assess whether institutional support shows differential associations with GPA among disadvantaged students.
+
+6.  Provide an engagement segmentation view across GPA bands to identify behavioural clustering patterns that may inform targeted intervention strategies.
+
+# 2. Data Pre-processing & Data Exploration
+
+## 2.1 Loading data & relevant libraries
+
+This section ensures a reproducible, minimal-transformation pipeline. In line with the analytical framing (ordinal GPA as the outcome), we (i) standardise column names, (ii) validate required variables, and (iii) recode coded fields into interpretable ordered factors. Feature engineering is limited to transparent proxy indices used for *stratification and comparison* (not causal claims).
+
+Besides tidyverse, the following packages will be used: readxl (Excel), janitor (standardise names), skimr (profiling), ggdist/ggridges (distribution visualisation), patchwork (composite plots), knitr (tables).
+
+```{r}
+pacman::p_load(
+  tidyverse, readxl, janitor, skimr, ggdist, ggridges, patchwork, knitr, stringr
+)
+```
+
+```{r}
+data_path <- "data/Database paper.xlsx"
+stopifnot(file.exists(data_path))
+
+df_raw <- readxl::read_excel(data_path, sheet = 1)
+
+orig_names <- names(df_raw)
+df_raw <- df_raw %>% janitor::clean_names()
+
+name_map <- tibble(original = orig_names, cleaned = names(df_raw))
+knitr::kable(name_map, caption = "Column name mapping: original Excel → clean_names()")
+```
+
+## 2.2 Quick structure checks
+
+::: panel-tabset
+# Plot
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+required_cols <- c(
+  "year","gender","policy_stu","minority_stu","poor_stu",
+  "father_edu","mother_edu","father_occupation","mother_occupation",
+  "time_friends","time_social_media","time_studying",
+  "gpa",
+  "adapt_learning_uni","study_methods",
+  "support_of_uni","support_of_lec","facilitie_uni","quality_lecturer",
+  "training_curriculum","competitive_class",
+  # peer influence column name may differ slightly across files
+  "peer_influence_col_placeholder"
+)
+
+# ---- Robust detection for "peer influence" column (common typos in dataset) ----
+peer_candidates <- names(df_raw)[str_detect(names(df_raw), "influ|infu.*friend")]
+if (length(peer_candidates) == 1) {
+  df_raw <- df_raw %>% rename(infuence_f_friends = all_of(peer_candidates))
+} else if ("infuence_f_friends" %in% names(df_raw)) {
+  # already correct
+} else if ("infuencef_friends" %in% names(df_raw)) {
+  df_raw <- df_raw %>% rename(infuence_f_friends = infuencef_friends)
+}
+
+required_cols <- required_cols %>%
+  replace(required_cols == "peer_influence_col_placeholder", "infuence_f_friends")
+
+missing_cols <- setdiff(required_cols, names(df_raw))
+
+if (length(missing_cols) > 0) {
+  stop(
+    paste0(
+      "Missing required columns after clean_names(): ",
+      paste(missing_cols, collapse = ", "),
+      "\n\nAvailable columns are:\n",
+      paste(names(df_raw), collapse = ", ")
+    )
+  )
+}
+
+# quick peek
+dplyr::glimpse(df_raw)
+```
+
+# Code
+
+```{r}
+#| echo: true
+#| eval: false
+
+required_cols <- c(
+  "year","gender","policy_stu","minority_stu","poor_stu",
+  "father_edu","mother_edu","father_occupation","mother_occupation",
+  "time_friends","time_social_media","time_studying",
+  "gpa",
+  "adapt_learning_uni","study_methods",
+  "support_of_uni","support_of_lec","facilitie_uni","quality_lecturer",
+  "training_curriculum","competitive_class",
+  # peer influence column name may differ slightly across files
+  "peer_influence_col_placeholder"
+)
+
+# ---- Robust detection for "peer influence" column (common typos in dataset) ----
+peer_candidates <- names(df_raw)[str_detect(names(df_raw), "influ|infu.*friend")]
+if (length(peer_candidates) == 1) {
+  df_raw <- df_raw %>% rename(infuence_f_friends = all_of(peer_candidates))
+} else if ("infuence_f_friends" %in% names(df_raw)) {
+  # already correct
+} else if ("infuencef_friends" %in% names(df_raw)) {
+  df_raw <- df_raw %>% rename(infuence_f_friends = infuencef_friends)
+}
+
+required_cols <- required_cols %>%
+  replace(required_cols == "peer_influence_col_placeholder", "infuence_f_friends")
+
+missing_cols <- setdiff(required_cols, names(df_raw))
+
+if (length(missing_cols) > 0) {
+  stop(
+    paste0(
+      "Missing required columns after clean_names(): ",
+      paste(missing_cols, collapse = ", "),
+      "\n\nAvailable columns are:\n",
+      paste(names(df_raw), collapse = ", ")
+    )
+  )
+}
+
+# quick peek
+dplyr::glimpse(df_raw)
+```
+:::
+
+## 2.3 Data processing strategy & feature engineering
+
+### 2.3.1 Coerce coded fields to numeric (minimal, explicit)
+
+The survey fields are recorded as coded integers. We parse them into integers first (to avoid factor coercion pitfalls), then recode into labelled ordered factors in the next step.
+
+::: panel-tabset
+# Plot
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+coded_cols <- c(
+  "year","gender","policy_stu","minority_stu","poor_stu",
+  "father_edu","mother_edu","father_occupation","mother_occupation",
+  "time_friends","time_social_media","time_studying",
+  "gpa",
+  "adapt_learning_uni","study_methods",
+  "support_of_uni","support_of_lec","facilitie_uni","quality_lecturer",
+  "training_curriculum","competitive_class","infuence_f_friends"
+)
+
+df_raw2 <- df_raw %>%
+  mutate(
+    across(
+      all_of(coded_cols),
+      ~ readr::parse_number(as.character(.x)) %>% as.integer()
+    )
+  )
+
+header_types <- sapply(df_raw2, class)
+knitr::kable(
+  tibble(variable = names(header_types), class = as.character(header_types)),
+  caption = "Column data types (after cleaning + coercion)"
+)
+
+missing_rate <- df_raw2 %>%
+  summarise(across(everything(), ~ mean(is.na(.x)))) %>%
+  pivot_longer(everything(), names_to = "variable", values_to = "missing_rate") %>%
+  arrange(desc(missing_rate))
+
+knitr::kable(head(missing_rate, 15), caption = "Top 15 variables by missing rate")
+```
+
+# Code
+
+```{r}
+#| echo: true
+#| eval: false
+
+coded_cols <- c(
+  "year","gender","policy_stu","minority_stu","poor_stu",
+  "father_edu","mother_edu","father_occupation","mother_occupation",
+  "time_friends","time_social_media","time_studying",
+  "gpa",
+  "adapt_learning_uni","study_methods",
+  "support_of_uni","support_of_lec","facilitie_uni","quality_lecturer",
+  "training_curriculum","competitive_class","infuence_f_friends"
+)
+
+df_raw2 <- df_raw %>%
+  mutate(
+    across(
+      all_of(coded_cols),
+      ~ readr::parse_number(as.character(.x)) %>% as.integer()
+    )
+  )
+
+header_types <- sapply(df_raw2, class)
+knitr::kable(
+  tibble(variable = names(header_types), class = as.character(header_types)),
+  caption = "Column data types (after cleaning + coercion)"
+)
+
+missing_rate <- df_raw2 %>%
+  summarise(across(everything(), ~ mean(is.na(.x)))) %>%
+  pivot_longer(everything(), names_to = "variable", values_to = "missing_rate") %>%
+  arrange(desc(missing_rate))
+
+knitr::kable(head(missing_rate, 15), caption = "Top 15 variables by missing rate")
+```
+:::
+
+### 2.3.2 Recode coded fields into labelled ordered factors
+
+We keep GPA as an ordered factor (ordinal outcome). Other ordinal items are also encoded as ordered factors to preserve survey scale meaning.
+
+::: panel-tabset
+# Plot
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+df <- df_raw2 %>%
+  mutate(
+    year = factor(
+      year, levels = 1:5,
+      labels = c("First-year","Second-year","Third-year","Fourth-year","Graduated"),
+      ordered = TRUE
+    ),
+    gender = factor(gender, levels = 1:2, labels = c("Male","Female")),
+    minority_stu = factor(minority_stu, levels = 1:2, labels = c("Yes","No")),
+    policy_stu   = factor(policy_stu,   levels = 1:2, labels = c("Yes","No")),
+    poor_stu     = factor(poor_stu,     levels = 1:2, labels = c("Yes","No")),
+
+    father_edu = factor(
+      father_edu, levels = 1:6,
+      labels = c("Primary","Secondary","High school","College","University/Grad","Other"),
+      ordered = TRUE
+    ),
+    mother_edu = factor(
+      mother_edu, levels = 1:6,
+      labels = c("Primary","Secondary","High school","College","University/Grad","Other"),
+      ordered = TRUE
+    ),
+
+    father_occupation = factor(
+      father_occupation, levels = 1:5,
+      labels = c("Gov employee","Self-employment","Freelance","Other","Not public")
+    ),
+    mother_occupation = factor(
+      mother_occupation, levels = 1:5,
+      labels = c("Gov employee","Self-employment","Freelance","Other","Not public")
+    ),
+
+    time_friends = factor(
+      time_friends, levels = 1:5,
+      labels = c("<1h","1-<2h","2-<3h","3-<4h",">=4h"),
+      ordered = TRUE
+    ),
+    time_social_media = factor(
+      time_social_media, levels = 1:5,
+      labels = c("<1h","1-<2h","2-<3h","3-<4h",">=4h"),
+      ordered = TRUE
+    ),
+    time_studying = factor(
+      time_studying, levels = 1:5,
+      labels = c("<2h","2-<4h","4-<6h","6-<8h",">=8h"),
+      ordered = TRUE
+    ),
+
+    gpa = factor(
+      gpa, levels = 1:5,
+      labels = c("<2.0 (Poor)","2.0-<2.5 (Average)","2.5-<3.2 (Fair)","3.2-<3.6 (Good)",">=3.6 (Excellent)"),
+      ordered = TRUE
+    ),
+
+    across(
+      c(adapt_learning_uni, study_methods, support_of_uni, support_of_lec,
+        facilitie_uni, quality_lecturer, training_curriculum,
+        competitive_class, infuence_f_friends),
+      ~ factor(.x, levels = 1:5, labels = as.character(1:5), ordered = TRUE)
+    )
+  )
+
+skimr::skim(df)
+```
+
+# Code
+
+```{r}
+#| echo: true
+#| eval: false
+df <- df_raw2 %>%
+  mutate(
+    year = factor(
+      year, levels = 1:5,
+      labels = c("First-year","Second-year","Third-year","Fourth-year","Graduated"),
+      ordered = TRUE
+    ),
+    gender = factor(gender, levels = 1:2, labels = c("Male","Female")),
+    minority_stu = factor(minority_stu, levels = 1:2, labels = c("Yes","No")),
+    policy_stu   = factor(policy_stu,   levels = 1:2, labels = c("Yes","No")),
+    poor_stu     = factor(poor_stu,     levels = 1:2, labels = c("Yes","No")),
+
+    father_edu = factor(
+      father_edu, levels = 1:6,
+      labels = c("Primary","Secondary","High school","College","University/Grad","Other"),
+      ordered = TRUE
+    ),
+    mother_edu = factor(
+      mother_edu, levels = 1:6,
+      labels = c("Primary","Secondary","High school","College","University/Grad","Other"),
+      ordered = TRUE
+    ),
+
+    father_occupation = factor(
+      father_occupation, levels = 1:5,
+      labels = c("Gov employee","Self-employment","Freelance","Other","Not public")
+    ),
+    mother_occupation = factor(
+      mother_occupation, levels = 1:5,
+      labels = c("Gov employee","Self-employment","Freelance","Other","Not public")
+    ),
+
+    time_friends = factor(
+      time_friends, levels = 1:5,
+      labels = c("<1h","1-<2h","2-<3h","3-<4h",">=4h"),
+      ordered = TRUE
+    ),
+    time_social_media = factor(
+      time_social_media, levels = 1:5,
+      labels = c("<1h","1-<2h","2-<3h","3-<4h",">=4h"),
+      ordered = TRUE
+    ),
+    time_studying = factor(
+      time_studying, levels = 1:5,
+      labels = c("<2h","2-<4h","4-<6h","6-<8h",">=8h"),
+      ordered = TRUE
+    ),
+
+    gpa = factor(
+      gpa, levels = 1:5,
+      labels = c("<2.0 (Poor)","2.0-<2.5 (Average)","2.5-<3.2 (Fair)","3.2-<3.6 (Good)",">=3.6 (Excellent)"),
+      ordered = TRUE
+    ),
+
+    across(
+      c(adapt_learning_uni, study_methods, support_of_uni, support_of_lec,
+        facilitie_uni, quality_lecturer, training_curriculum,
+        competitive_class, infuence_f_friends),
+      ~ factor(.x, levels = 1:5, labels = as.character(1:5), ordered = TRUE)
+    )
+  )
+
+skimr::skim(df)
+```
+:::
+
+### 2.3.3 Feature engineering: transparent proxy indices (for stratification/comparison)
+
+-   SES_index: parents’ education (father + mother), used to form Low/Mid/High tertiles.
+
+-   Support_index: perceived institutional environment (uni + lecturer support + facilities + lecturer quality).
+
+-   Engagement_index: learning engagement proxy (adaptation + study methods + study time).
+
+::: panel-tabset
+# Plot
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+df2 <- df %>%
+  mutate(
+    # numeric proxies (safe: ordered factors)
+    gpa_n        = as.numeric(gpa),
+    father_edu_n = as.numeric(father_edu),
+    mother_edu_n = as.numeric(mother_edu),
+
+    adapt_n    = as.numeric(adapt_learning_uni),
+    method_n   = as.numeric(study_methods),
+    study_n    = as.numeric(time_studying),
+
+    uni_sup_n  = as.numeric(support_of_uni),
+    lec_sup_n  = as.numeric(support_of_lec),
+    faci_n     = as.numeric(facilitie_uni),
+    lectq_n    = as.numeric(quality_lecturer),
+
+    # indices (NA-robust)
+    ses_index = father_edu_n + mother_edu_n,
+
+    engagement_index = rowMeans(cbind(adapt_n, method_n, study_n), na.rm = TRUE),
+    support_index    = rowMeans(cbind(uni_sup_n, lec_sup_n, faci_n, lectq_n), na.rm = TRUE),
+
+    # tertiles for stratification
+    ses_group = ntile(ses_index, 3),
+    ses_group = factor(ses_group, labels = c("Low SES","Mid SES","High SES"))
+  )
+
+# quick sanity checks (these will show in Output tab)
+df2 %>%
+  select(gpa, gpa_n, ses_index, ses_group, engagement_index, support_index) %>%
+  head(8)
+
+knitr::kable(
+  df2 %>% count(ses_group) %>% mutate(pct = n / sum(n)),
+  digits = 3,
+  caption = "SES group distribution (tertiles)"
+)
+```
+
+# Code
+
+```{r}
+#| echo: true
+#| eval: false
+
+df2 <- df %>%
+  mutate(
+    gpa_n        = as.numeric(gpa),
+    father_edu_n = as.numeric(father_edu),
+    mother_edu_n = as.numeric(mother_edu),
+    adapt_n    = as.numeric(adapt_learning_uni),
+    method_n   = as.numeric(study_methods),
+    study_n    = as.numeric(time_studying),
+    uni_sup_n  = as.numeric(support_of_uni),
+    lec_sup_n  = as.numeric(support_of_lec),
+    faci_n     = as.numeric(facilitie_uni),
+    lectq_n    = as.numeric(quality_lecturer),
+    ses_index = father_edu_n + mother_edu_n,
+    engagement_index = rowMeans(cbind(adapt_n, method_n, study_n), na.rm = TRUE),
+    support_index    = rowMeans(cbind(uni_sup_n, lec_sup_n, faci_n, lectq_n), na.rm = TRUE),
+    ses_group = ntile(ses_index, 3),
+    ses_group = factor(ses_group, labels = c("Low SES","Mid SES","High SES"))
+  )
+```
+:::
+
+## 2.4 EDA (quality checks aligned to the outcome-centric framing)
+
+### 2.4.1 Missingness overview (to assess reliability of downstream comparisons)
+
+A preliminary inspection shows negligible missingness across core variables (all \<1%), suggesting that downstream subgroup comparisons are unlikely to be biased by incomplete records.
+
+### 2.4.2 Baseline outcome check: GPA band counts (sanity check for ordinal outcome)
+
+::: panel-tabset
+# Plot
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+gpa_counts <- df2 %>%
+  count(gpa) %>%
+  mutate(prop = n / sum(n))
+
+ggplot(gpa_counts, aes(x = gpa, y = prop)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  labs(
+    title = "Baseline distribution of GPA bands (count-normalised)",
+    x = "GPA band",
+    y = "Proportion"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 15, hjust = 1))
+```
+
+# Code
+
+```{r}
+#| echo: true
+#| eval: false
+
+gpa_counts <- df2 %>%
+  count(gpa) %>%
+  mutate(prop = n / sum(n))
+
+ggplot(gpa_counts, aes(x = gpa, y = prop)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  labs(
+    title = "Baseline distribution of GPA bands (count-normalised)",
+    x = "GPA band",
+    y = "Proportion"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 15, hjust = 1))
+```
+:::
+
+Baseline EDA shows that GPA is heavily concentrated in the mid bands. The majority of students fall within 2.5–\<3.2 (Fair), accounting for more than half of the sample, followed by 3.2–\<3.6 (Good) at roughly one-third. The lower bands (\<2.5) and the highest band (≥3.6) each represent only a small minority. This indicates an imbalanced but ordinal distribution centred around average-to-good performance, with relatively few extreme low or high outcomes. The pattern supports treating GPA band as an ordinal outcome and suggests that subsequent modelling should account for class imbalance while preserving the natural ranking structure.
+
+# 3. Analytical Visualisation
+
+## Common theme
+
+```{r}
+theme_set(
+  theme_minimal(base_size = 12) +
+    theme(
+      plot.title = element_text(face = "bold"),
+      legend.position = "bottom"
+    )
+)
+```
+
+## Visualisation 1 — Baseline distribution of GPA (ggdist)
+
+Steps taken:
+
+1.  Use ordinal mapping `gpa_n` converted from `gpa` (ordered factor).
+
+2.  Use `stat_halfeye()` to show the distribution and central mass.
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+p1 <- ggplot(df2, aes(x = gpa_n)) +
+  ggdist::stat_halfeye(adjust = 0.7, .width = 0.8) +
+  scale_x_continuous(
+    breaks = 1:5,
+    labels = levels(df2$gpa)
+  ) +
+  labs(
+    title = "Overall distribution of GPA (ordinal bands)",
+    x = "GPA band",
+    y = NULL
+  )
+
+p1
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+
+p1 <- ggplot(df2, aes(x = gpa_n)) +
+  ggdist::stat_halfeye(adjust = 0.7, .width = 0.8) +
+  scale_x_continuous(
+    breaks = 1:5,
+    labels = levels(df2$gpa)
+  ) +
+  labs(
+    title = "Overall distribution of GPA (ordinal bands)",
+    x = "GPA band",
+    y = NULL
+  )
+
+p1
+```
+:::
+
+The baseline distribution of GPA shows a clear concentration in the mid-performance bands. Most observations fall within the “2.5–\<3.2 (Fair)” and “3.2–\<3.6 (Good)” categories, indicating that the majority of students achieve moderate to relatively strong academic outcomes. The density mass is visibly highest around the Fair band, while the lower (\<2.0) and highest (≥3.6) bands contain comparatively fewer students. The central interval highlights that GPA values are not evenly distributed but cluster within a relatively narrow academic range. This suggests limited polarization in performance and provides a stable reference point for subsequent subgroup comparisons (e.g., by socioeconomic background, study behaviour, or institutional support).
+
+## Visualisation 2 — Developmental structure: Year vs GPA
+
+Steps taken:
+
+1.  Compare GPA distribution across academic years.
+
+2.  Use proportional stacked bars for structural clarity. 3. Interpret risk concentration patterns.
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+ggplot(df2, aes(x = year, fill = gpa)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Proportional distribution of GPA bands across academic years",
+    x = "Academic Year",
+    y = "Proportion within year",
+    fill = "GPA band"
+  )
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+p_year <- ggplot(df2, aes(x = year, fill = gpa)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Proportional distribution of GPA bands across academic years",
+    x = "Academic Year",
+    y = "Proportion within year",
+    fill = "GPA band"
+  )
+p_year
+```
+:::
+
+Across academic years, GPA bands remain concentrated in the 2.5–3.2 (Fair) range, suggesting structural stability in overall performance distribution. However, the Graduated group shows a visibly higher proportion in the 3.2–3.6 (Good) band and a slight increase in the ≥3.6 (Excellent) segment. In contrast, Fourth-year students display relatively more concentration in the mid bands. This pattern may indicate mild positive selection or performance consolidation toward graduation, rather than dramatic academic mobility across years.
+
+## Visualisation 3 — Equity lens: Minority status vs GPA
+
+Steps taken:
+
+1.  Compare GPA distribution by minority status.
+
+2.  Use proportional stacked bars to show structural differences.
+
+3.  Evaluate concentration of lower GPA bands.
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+ggplot(df2, aes(x = minority_stu, fill = gpa)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Proportional distribution of GPA bands by minority status",
+    x = "Minority status",
+    y = "Proportion within group",
+    fill = "GPA band"
+  )
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+p_minority <- ggplot(df2, aes(x = minority_stu, fill = gpa)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Proportional distribution of GPA bands by minority status",
+    x = "Minority status",
+    y = "Proportion within group",
+    fill = "GPA band"
+  )
+p_minority
+```
+:::
+
+Clear structural disparities emerge by minority status. Non-minority students show a higher proportion in the 3.2–3.6 (Good) and ≥3.6 (Excellent) bands, while minority students are more concentrated in the 2.5–3.2 (Fair) range. Although extreme low performance (\<2.0) remains limited in both groups, the upward distribution shift among non-minority students suggests persistent performance gaps. The pattern signals potential equity concerns and highlights the importance of examining structural and institutional factors associated with academic outcomes.
+
+## Visualisation 4 — Structural disparity: SES vs GPA
+
+Steps taken:
+
+1.  Build SES proxy from parents’ education (father_edu + mother_edu).
+
+2.  Split into Low/Mid/High SES tertiles based on ses_index.
+
+3.  Compare GPA bands across SES groups.
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# --- Safety check (fail early if missing columns) ---
+stopifnot(
+  all(c("gpa","gpa_n","ses_group") %in% names(df2))
+)
+
+p2 <- ggplot(df2, aes(x = ses_group, y = gpa_n)) +
+  geom_boxplot(width = 0.55, outlier.alpha = 0.25) +
+  geom_jitter(width = 0.12, alpha = 0.10) +
+  scale_y_continuous(breaks = 1:5, labels = levels(df2$gpa)) +
+  labs(
+    title = "GPA differences across SES groups (parental education proxy)",
+    x = "SES group (tertiles)",
+    y = "GPA band"
+  )
+
+p2
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+
+# If ses_group is not yet created in df2, you can build it robustly as follows:
+df2 <- df2 %>%
+  mutate(
+    ses_group = if (!"ses_group" %in% names(df2)) {
+      cut(
+        ses_index,
+        breaks = quantile(ses_index, probs = c(0, 1/3, 2/3, 1), na.rm = TRUE),
+        include.lowest = TRUE,
+        labels = c("Low SES", "Mid SES", "High SES")
+      )
+    } else ses_group
+  )
+
+p2 <- ggplot(df2, aes(x = ses_group, y = gpa_n)) +
+  geom_boxplot(width = 0.55, outlier.alpha = 0.25) +
+  geom_jitter(width = 0.12, alpha = 0.10) +
+  scale_y_continuous(breaks = 1:5, labels = levels(df2$gpa)) +
+  labs(
+    title = "GPA differences across SES groups (parental education proxy)",
+    x = "SES group (tertiles)",
+    y = "GPA band"
+  )
+
+p2
+```
+:::
+
+Students from higher SES backgrounds (measured by parental education) show a modest upward shift in GPA distribution. While all three groups concentrate in the “Fair” to “Good” bands, the High SES group displays slightly more observations in the “Good” and “Excellent” categories and fewer in the lower bands. Median GPA appears marginally higher for Mid and High SES relative to Low SES, though the distributions substantially overlap. This suggests that parental education is associated with academic outcomes, but the disparity is moderate rather than sharply segmented, indicating SES may influence performance without fully determining it.
+
+## Visualisation 5 — Behavioural correlates: study time vs social media time (patchwork)
+
+Steps taken:
+
+1.  Compare GPA by time_studying.
+
+2.  Compare GPA by time_social_media.
+
+3.  Place side-by-side for interpretability.
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# --- Safety check (fail early if missing columns) ---
+stopifnot(
+  all(c("gpa","gpa_n","time_studying","time_social_media") %in% names(df2))
+)
+
+p_study <- ggplot(df2, aes(x = time_studying, y = gpa_n)) +
+  geom_boxplot(width = 0.6, outlier.alpha = 0.25) +
+  geom_jitter(width = 0.12, alpha = 0.10) +
+  scale_y_continuous(breaks = 1:5, labels = levels(df2$gpa)) +
+  labs(
+    title = "GPA by Study Time",
+    x = "Daily study time (ordinal)",
+    y = "GPA band"
+  )
+
+p_social <- ggplot(df2, aes(x = time_social_media, y = gpa_n)) +
+  geom_boxplot(width = 0.6, outlier.alpha = 0.25) +
+  geom_jitter(width = 0.12, alpha = 0.10) +
+  scale_y_continuous(breaks = 1:5, labels = levels(df2$gpa)) +
+  labs(
+    title = "GPA by Social Media Time",
+    x = "Daily social media time (ordinal)",
+    y = "GPA band"
+  )
+
+(p_study | p_social) +
+  plot_annotation(title = "Behavioural correlates associated with GPA (comparative view)")
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Safety check
+stopifnot(
+  all(c("gpa","gpa_n","time_studying","time_social_media") %in% names(df2))
+)
+
+p_study <- ggplot(df2, aes(x = time_studying, y = gpa_n)) +
+  geom_boxplot(width = 0.6, outlier.alpha = 0.25) +
+  geom_jitter(width = 0.12, alpha = 0.10) +
+  scale_y_continuous(breaks = 1:5, labels = levels(df2$gpa)) +
+  labs(
+    title = "GPA by Study Time",
+    x = "Daily study time (ordinal)",
+    y = "GPA band"
+  )
+
+p_social <- ggplot(df2, aes(x = time_social_media, y = gpa_n)) +
+  geom_boxplot(width = 0.6, outlier.alpha = 0.25) +
+  geom_jitter(width = 0.12, alpha = 0.10) +
+  scale_y_continuous(breaks = 1:5, labels = levels(df2$gpa)) +
+  labs(
+    title = "GPA by Social Media Time",
+    x = "Daily social media time (ordinal)",
+    y = "GPA band"
+  )
+
+(p_study | p_social) +
+  plot_annotation(title = "Behavioural correlates associated with GPA (comparative view)")
+```
+:::
+
+The left panel shows a clearer monotonic gradient for study time: as daily study hours increase, the central mass of GPA shifts upward, with higher proportions of “Good” and “Excellent” bands concentrated in the ≥6h and ≥8h groups. Lower study-time categories display greater dispersion toward the lower GPA bands. In contrast, the social media panel shows weaker structural separation. GPA distributions across usage categories overlap substantially, and higher usage does not consistently correspond to lower performance. Although heavy users show slightly more variability and occasional concentration in lower bands, the shift is modest relative to study time. Overall, study time demonstrates a stronger and more systematic behavioural association with GPA, suggesting that academic effort allocation is a more reliable and actionable correlate than simply reducing social media exposure.
+
+## Visualisation 6 — Institutional support as a moderator (poor vs non-poor)
+
+Steps taken:
+
+1.  Build support_index from institutional environment items.
+
+2.  Compare relationship with GPA.
+
+3.  Facet by poor_stu to reveal potential moderation.
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+
+# --- safety: ensure required columns exist ---
+req_cols <- c("poor_stu","gpa","gpa_n",
+              "support_of_uni","support_of_lec","facilitie_uni","quality_lecturer")
+stopifnot(all(req_cols %in% names(df2)))
+
+# --- safety: ensure support_index exists (create if missing) ---
+if (!("support_index" %in% names(df2))) {
+  df2 <- df2 %>%
+    mutate(
+      support_index = rowMeans(
+        across(c(support_of_uni, support_of_lec, facilitie_uni, quality_lecturer),
+               ~ as.numeric(.x)),
+        na.rm = TRUE
+      )
+    )
+}
+
+p4 <- ggplot(df2, aes(x = support_index, y = gpa_n)) +
+  geom_point(alpha = 0.18) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~ poor_stu) +
+  scale_y_continuous(breaks = 1:5, labels = levels(df2$gpa)) +
+  labs(
+    title = "Institutional support and GPA: comparison by poverty status",
+    x = "Support index (avg of Uni/Lecturer/Facilities/Quality)",
+    y = "GPA band"
+  )
+
+p4
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Required columns check
+req_cols <- c("poor_stu","gpa","gpa_n",
+              "support_of_uni","support_of_lec","facilitie_uni","quality_lecturer")
+stopifnot(all(req_cols %in% names(df2)))
+
+# Create support_index if not already present
+if (!("support_index" %in% names(df2))) {
+  df2 <- df2 %>%
+    mutate(
+      support_index = rowMeans(
+        across(c(support_of_uni, support_of_lec, facilitie_uni, quality_lecturer),
+               ~ as.numeric(.x)),
+        na.rm = TRUE
+      )
+    )
+}
+
+p4 <- ggplot(df2, aes(x = support_index, y = gpa_n)) +
+  geom_point(alpha = 0.18) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~ poor_stu) +
+  scale_y_continuous(breaks = 1:5, labels = levels(df2$gpa)) +
+  labs(
+    title = "Institutional support and GPA: comparison by poverty status",
+    x = "Support index (avg of Uni/Lecturer/Facilities/Quality)",
+    y = "GPA band"
+  )
+
+p4
+```
+:::
+
+This figure examines whether perceived institutional support aligns with GPA and whether the pattern differs by poverty status. Among non-poor students, the relationship between support_index and GPA appears mildly positive: higher perceived support corresponds to slightly higher GPA bands, though dispersion remains wide. For poor-household students, the pattern is more volatile and less clearly positive, suggesting that support alone may not uniformly translate into higher performance within this group. The divergence between panels is consistent with a moderation interpretation: institutional support may operate differently depending on socioeconomic background. From a policy perspective, this implies that while strengthening teaching quality and learning facilities benefits the broader student body, disadvantaged students may require more targeted or complementary interventions (e.g., mentoring, financial stability, structured academic guidance) for support mechanisms to effectively translate into improved academic outcomes.
+
+## Visualisation 7 — Engagement segmentation by GPA (ggridges)
+
+Steps taken:
+
+1.  Build engagement_index from adaptation + study methods + study time.
+
+2.  Use ridge densities to compare engagement distributions across GPA bands.
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+p5 <- ggplot(df2, aes(x = engagement_index, y = gpa, fill = gpa)) +
+  ggridges::geom_density_ridges(alpha = 0.7, scale = 1.05, color = "white") +
+  labs(
+    title = "Engagement index distribution by GPA band",
+    x = "Engagement index (avg of Adaptation + Study Methods + Study Time)",
+    y = "GPA band"
+  ) +
+  guides(fill = "none")
+
+p5
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+
+p5 <- ggplot(df2, aes(x = engagement_index, y = gpa, fill = gpa)) +
+  ggridges::geom_density_ridges(alpha = 0.7, scale = 1.05, color = "white") +
+  labs(
+    title = "Engagement index distribution by GPA band",
+    x = "Engagement index (avg of Adaptation + Study Methods + Study Time)",
+    y = "GPA band"
+  ) +
+  guides(fill = "none")
+
+p5
+```
+:::
+
+The ridge plot presents a segmentation-style view of engagement across GPA bands. The distributions shift progressively to the right as GPA increases, indicating that higher-performing students tend to report stronger adaptation to university learning, more effective study methods, and greater study time (as captured by the composite engagement index). Although the ridges overlap—showing that engagement does not perfectly determine performance—the gradient is clear: lower GPA bands concentrate more mass at lower engagement values, while “Good” and “Excellent” groups cluster at higher engagement levels. This pattern supports engagement as a meaningful and actionable correlate of academic outcomes. For intervention design, it suggests prioritising structured engagement-building strategies, particularly for students concentrated in the lower-left portion of the distribution.
+
+## Insight synthesis (7-step analytical progression)
+
+1.  Baseline: GPA is concentrated in mid-to-upper bands; improvement is best framed as moving students up one ordinal band.
+
+2.  Developmental: Lower GPA risk mass is more concentrated in earlier academic years, indicating a transition window for early interventions.
+
+3.  Equity: Minority-status comparison reveals whether learning outcome distributions differ structurally across identity groups.
+
+4.  Disparity: SES groups differ; Low SES carries higher risk mass in lower GPA bands.
+
+5.  Behaviour: Study time aligns more consistently with GPA than social media time.
+
+6.  Moderation: Institutional support shows stronger alignment with GPA among poor-household students.
+
+7.  Segmentation: Engagement distributions shift with GPA, providing a profile-based lens for interventions.

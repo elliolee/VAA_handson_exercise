@@ -450,10 +450,11 @@ ggplot(exam,
 
 ## 4.4.4 Finishing touch
 
-Lastly, coord_flip() of ggplot2 package will be used to flip the raincloud chart horizontally to give it the raincloud appearance. At the same time, theme_economist() of ggthemes package is used to give the raincloud chart a professional publishing standard look. ::: panel-tabset \## Plot
+Lastly, coord_flip() of ggplot2 package will be used to flip the raincloud chart horizontally to give it the raincloud appearance. At the same time, theme_economist() of ggthemes package is used to give the raincloud chart a professional publishing standard look.
 
 ::: panel-tabset
 ## Plot
+
 ```{r}
 #| echo: false
 
@@ -495,14 +496,13 @@ ggplot(exam,
   coord_flip() +
   theme_economist()
 ```
-
 :::
 
 ### **Reference**
 
 ## Reference
 
-- [Introducing Ridgeline Plots (formerly Joyplots)](https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html)
-- Claus O. Wilke [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) especially Chapter [6](https://clauswilke.com/dataviz/), [7](https://clauswilke.com/dataviz/), [8](https://clauswilke.com/dataviz/), [9](https://clauswilke.com/dataviz/) and [10](https://clauswilke.com/dataviz/).
-- Allen M, Poggiali D, Whitaker K et al. “[Raincloud plots: a multi-platform tool for robust data visualization](https://wellcomeopenresearch.org/articles/4-63)” [version 2; peer review: 2 approved]. Wellcome Open Research 2021, pp. 4:63.
-- [Dots + interval stats and geoms](https://mjskay.github.io/ggdist/)
+-   [Introducing Ridgeline Plots (formerly Joyplots)](https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html)
+-   Claus O. Wilke [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) especially Chapter [6](https://clauswilke.com/dataviz/), [7](https://clauswilke.com/dataviz/), [8](https://clauswilke.com/dataviz/), [9](https://clauswilke.com/dataviz/) and [10](https://clauswilke.com/dataviz/).
+-   Allen M, Poggiali D, Whitaker K et al. “[Raincloud plots: a multi-platform tool for robust data visualization](https://wellcomeopenresearch.org/articles/4-63)” \[version 2; peer review: 2 approved\]. Wellcome Open Research 2021, pp. 4:63.
+-   [Dots + interval stats and geoms](https://mjskay.github.io/ggdist/)

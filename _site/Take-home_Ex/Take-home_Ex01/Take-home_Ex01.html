@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ligen">
+<meta name="dcterms.date" content="2026-02-11">
+
+<title>Take-home Exercise 1 – VAA_handson_exercise</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a1c87f40015067c62c82f3c4ff3d1ad4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">VAA_handson_exercise</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-pencil-square" role="img">
+</i> 
+ <span class="menu-text">Hands-on Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html">
+ <span class="dropdown-text">Hands-on Part 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html">
+ <span class="dropdown-text">Hands-on Part 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03a.html">
+ <span class="dropdown-text">Hands-on Part 3a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03b.html">
+ <span class="dropdown-text">Hands-on Part 3b</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04a.html">
+ <span class="dropdown-text">Hands-on Part 4a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04b.html">
+ <span class="dropdown-text">Hands-on Part 4b</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04c.html">
+ <span class="dropdown-text">Hands-on Part 4c</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04d.html">
+ <span class="dropdown-text">Hands-on Part 4d</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-backpack" role="img">
+</i> 
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">1. Overview</a>
+  <ul class="collapse">
+  <li><a href="#context-analytical-framing" id="toc-context-analytical-framing" class="nav-link" data-scroll-target="#context-analytical-framing">1.1 Context &amp; Analytical Framing</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">1.2 Objectives</a></li>
+  </ul></li>
+  <li><a href="#data-pre-processing-data-exploration" id="toc-data-pre-processing-data-exploration" class="nav-link" data-scroll-target="#data-pre-processing-data-exploration">2. Data Pre-processing &amp; Data Exploration</a>
+  <ul class="collapse">
+  <li><a href="#loading-data-relevant-libraries" id="toc-loading-data-relevant-libraries" class="nav-link" data-scroll-target="#loading-data-relevant-libraries">2.1 Loading data &amp; relevant libraries</a></li>
+  <li><a href="#quick-structure-checks" id="toc-quick-structure-checks" class="nav-link" data-scroll-target="#quick-structure-checks">2.2 Quick structure checks</a></li>
+  <li><a href="#data-processing-strategy-feature-engineering" id="toc-data-processing-strategy-feature-engineering" class="nav-link" data-scroll-target="#data-processing-strategy-feature-engineering">2.3 Data processing strategy &amp; feature engineering</a>
+  <ul class="collapse">
+  <li><a href="#coerce-coded-fields-to-numeric-minimal-explicit" id="toc-coerce-coded-fields-to-numeric-minimal-explicit" class="nav-link" data-scroll-target="#coerce-coded-fields-to-numeric-minimal-explicit">2.3.1 Coerce coded fields to numeric (minimal, explicit)</a></li>
+  <li><a href="#recode-coded-fields-into-labelled-ordered-factors" id="toc-recode-coded-fields-into-labelled-ordered-factors" class="nav-link" data-scroll-target="#recode-coded-fields-into-labelled-ordered-factors">2.3.2 Recode coded fields into labelled ordered factors</a></li>
+  <li><a href="#feature-engineering-transparent-proxy-indices-for-stratificationcomparison" id="toc-feature-engineering-transparent-proxy-indices-for-stratificationcomparison" class="nav-link" data-scroll-target="#feature-engineering-transparent-proxy-indices-for-stratificationcomparison">2.3.3 Feature engineering: transparent proxy indices (for stratification/comparison)</a></li>
+  </ul></li>
+  <li><a href="#eda-quality-checks-aligned-to-the-outcome-centric-framing" id="toc-eda-quality-checks-aligned-to-the-outcome-centric-framing" class="nav-link" data-scroll-target="#eda-quality-checks-aligned-to-the-outcome-centric-framing">2.4 EDA (quality checks aligned to the outcome-centric framing)</a>
+  <ul class="collapse">
+  <li><a href="#missingness-overview-to-assess-reliability-of-downstream-comparisons" id="toc-missingness-overview-to-assess-reliability-of-downstream-comparisons" class="nav-link" data-scroll-target="#missingness-overview-to-assess-reliability-of-downstream-comparisons">2.4.1 Missingness overview (to assess reliability of downstream comparisons)</a></li>
+  <li><a href="#baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome" id="toc-baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome" class="nav-link" data-scroll-target="#baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome">2.4.2 Baseline outcome check: GPA band counts (sanity check for ordinal outcome)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#analytical-visualisation" id="toc-analytical-visualisation" class="nav-link" data-scroll-target="#analytical-visualisation">3. Analytical Visualisation</a>
+  <ul class="collapse">
+  <li><a href="#common-theme" id="toc-common-theme" class="nav-link" data-scroll-target="#common-theme">Common theme</a></li>
+  <li><a href="#visualisation-1-baseline-distribution-of-gpa-ggdist" id="toc-visualisation-1-baseline-distribution-of-gpa-ggdist" class="nav-link" data-scroll-target="#visualisation-1-baseline-distribution-of-gpa-ggdist">Visualisation 1 — Baseline distribution of GPA (ggdist)</a></li>
+  <li><a href="#visualisation-2-developmental-structure-year-vs-gpa" id="toc-visualisation-2-developmental-structure-year-vs-gpa" class="nav-link" data-scroll-target="#visualisation-2-developmental-structure-year-vs-gpa">Visualisation 2 — Developmental structure: Year vs GPA</a></li>
+  <li><a href="#visualisation-3-equity-lens-minority-status-vs-gpa" id="toc-visualisation-3-equity-lens-minority-status-vs-gpa" class="nav-link" data-scroll-target="#visualisation-3-equity-lens-minority-status-vs-gpa">Visualisation 3 — Equity lens: Minority status vs GPA</a></li>
+  <li><a href="#visualisation-4-structural-disparity-ses-vs-gpa" id="toc-visualisation-4-structural-disparity-ses-vs-gpa" class="nav-link" data-scroll-target="#visualisation-4-structural-disparity-ses-vs-gpa">Visualisation 4 — Structural disparity: SES vs GPA</a></li>
+  <li><a href="#visualisation-5-behavioural-correlates-study-time-vs-social-media-time-patchwork" id="toc-visualisation-5-behavioural-correlates-study-time-vs-social-media-time-patchwork" class="nav-link" data-scroll-target="#visualisation-5-behavioural-correlates-study-time-vs-social-media-time-patchwork">Visualisation 5 — Behavioural correlates: study time vs social media time (patchwork)</a></li>
+  <li><a href="#visualisation-6-institutional-support-as-a-moderator-poor-vs-non-poor" id="toc-visualisation-6-institutional-support-as-a-moderator-poor-vs-non-poor" class="nav-link" data-scroll-target="#visualisation-6-institutional-support-as-a-moderator-poor-vs-non-poor">Visualisation 6 — Institutional support as a moderator (poor vs non-poor)</a></li>
+  <li><a href="#visualisation-7-engagement-segmentation-by-gpa-ggridges" id="toc-visualisation-7-engagement-segmentation-by-gpa-ggridges" class="nav-link" data-scroll-target="#visualisation-7-engagement-segmentation-by-gpa-ggridges">Visualisation 7 — Engagement segmentation by GPA (ggridges)</a></li>
+  <li><a href="#insight-synthesis-7-step-analytical-progression" id="toc-insight-synthesis-7-step-analytical-progression" class="nav-link" data-scroll-target="#insight-synthesis-7-step-analytical-progression">Insight synthesis (7-step analytical progression)</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Take-home Exercise 1</h1>
+<p class="subtitle lead">Exploring Factors Associated with Student Learning Outcomes</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ligen </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 11, 2026</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">February 19, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  tidyverse, readxl, janitor, skimr,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  ggdist, ggridges, patchwork,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  knitr, scales, stringr</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="overview" class="level1">
+<h1>1. Overview</h1>
+<section id="context-analytical-framing" class="level2">
+<h2 class="anchored" data-anchor-id="context-analytical-framing">1.1 Context &amp; Analytical Framing</h2>
+<p>University administrators increasingly rely on survey data to identify (i) which student groups face higher academic risk, (ii) what learning behaviours correlate with performance, and (iii) which institutional supports are most strongly associated with improved learning outcomes.</p>
+<p>This take-home exercise analyses a student survey dataset that captures multiple structural layers of student experience:</p>
+<ul>
+<li><p>Background characteristics: Year, Gender, Minority status, Policy support status, Poverty status</p></li>
+<li><p>Family socioeconomic proxies: Parents’ education and occupation</p></li>
+<li><p>Time allocation behaviours: Study time, social media time, time with friends</p></li>
+<li><p>Perceived learning environment: Adaptation to university, study methods, institutional support, facilities, lecturer quality, curriculum, competitive climate, peer influence</p></li>
+</ul>
+<p>The outcome variable is an ordinal GPA band, reflecting academic performance categories rather than continuous scores.</p>
+<p>Rather than conducting exhaustive exploratory analysis, this study adopts a structured analytical framing. The visualisations are organised to move from:</p>
+<ol type="1">
+<li><p>Baseline outcome distribution</p></li>
+<li><p>Structural disparities (year, SES, minority)</p></li>
+<li><p>Behavioural correlates</p></li>
+<li><p>Institutional moderation</p></li>
+<li><p>Engagement segmentation</p></li>
+</ol>
+<p>The emphasis is on truthful, interpretable visual encodings that support decision-relevant insights, while preserving the ordinal and structural nature of the data.</p>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">1.2 Objectives</h2>
+<p>This post aims to:</p>
+<ol type="1">
+<li><p>Establish the baseline distribution of GPA bands to understand overall performance concentration.</p></li>
+<li><p>Examine whether structural characteristics (academic year and minority status) are associated with differences in GPA distribution.</p></li>
+<li><p>Evaluate whether socioeconomic proxies (parents’ education) relate to GPA disparities.</p></li>
+<li><p>Compare behavioural correlates of performance by examining study time versus social media time.</p></li>
+<li><p>Assess whether institutional support shows differential associations with GPA among disadvantaged students.</p></li>
+<li><p>Provide an engagement segmentation view across GPA bands to identify behavioural clustering patterns that may inform targeted intervention strategies.</p></li>
+</ol>
+</section>
+</section>
+<section id="data-pre-processing-data-exploration" class="level1">
+<h1>2. Data Pre-processing &amp; Data Exploration</h1>
+<section id="loading-data-relevant-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="loading-data-relevant-libraries">2.1 Loading data &amp; relevant libraries</h2>
+<p>This section ensures a reproducible, minimal-transformation pipeline. In line with the analytical framing (ordinal GPA as the outcome), we (i) standardise column names, (ii) validate required variables, and (iii) recode coded fields into interpretable ordered factors. Feature engineering is limited to transparent proxy indices used for <em>stratification and comparison</em> (not causal claims).</p>
+<p>Besides tidyverse, the following packages will be used: readxl (Excel), janitor (standardise names), skimr (profiling), ggdist/ggridges (distribution visualisation), patchwork (composite plots), knitr (tables).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  tidyverse, readxl, janitor, skimr, ggdist, ggridges, patchwork, knitr, stringr</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="st">"data/Database paper.xlsx"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">file.exists</span>(data_path))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(data_path, <span class="at">sheet =</span> <span class="dv">1</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>orig_names <span class="ot">&lt;-</span> <span class="fu">names</span>(df_raw)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> df_raw <span class="sc">%&gt;%</span> janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>name_map <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">original =</span> orig_names, <span class="at">cleaned =</span> <span class="fu">names</span>(df_raw))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(name_map, <span class="at">caption =</span> <span class="st">"Column name mapping: original Excel → clean_names()"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Column name mapping: original Excel → clean_names()</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">original</th>
+<th style="text-align: left;">cleaned</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Year</td>
+<td style="text-align: left;">year</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gender</td>
+<td style="text-align: left;">gender</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Policy_Stu</td>
+<td style="text-align: left;">policy_stu</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Minority_Stu</td>
+<td style="text-align: left;">minority_stu</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Poor_Stu</td>
+<td style="text-align: left;">poor_stu</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Father_Edu</td>
+<td style="text-align: left;">father_edu</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mother_Edu</td>
+<td style="text-align: left;">mother_edu</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Father_Occupation</td>
+<td style="text-align: left;">father_occupation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mother_Occupation</td>
+<td style="text-align: left;">mother_occupation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Time_Friends</td>
+<td style="text-align: left;">time_friends</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Time_SocialMedia</td>
+<td style="text-align: left;">time_social_media</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Time_Studying</td>
+<td style="text-align: left;">time_studying</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GPA</td>
+<td style="text-align: left;">gpa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Adapt_Learning_Uni</td>
+<td style="text-align: left;">adapt_learning_uni</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Study_Methods</td>
+<td style="text-align: left;">study_methods</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SupportOf_Uni</td>
+<td style="text-align: left;">support_of_uni</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SupportOf_Lec</td>
+<td style="text-align: left;">support_of_lec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Facilitie_Uni</td>
+<td style="text-align: left;">facilitie_uni</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Quality_Lecturer</td>
+<td style="text-align: left;">quality_lecturer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TrainingCurriculum</td>
+<td style="text-align: left;">training_curriculum</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Competitive_Class</td>
+<td style="text-align: left;">competitive_class</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">InfuenceF_Friends</td>
+<td style="text-align: left;">infuence_f_friends</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="quick-structure-checks" class="level2">
+<h2 class="anchored" data-anchor-id="quick-structure-checks">2.2 Quick structure checks</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,170
+Columns: 22
+$ year                &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
+$ gender              &lt;dbl&gt; 2, 1, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2,…
+$ policy_stu          &lt;dbl&gt; 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2,…
+$ minority_stu        &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
+$ poor_stu            &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
+$ father_edu          &lt;dbl&gt; 4, 3, 4, 5, 2, 5, 6, 5, 5, 5, 3, 3, 3, 3, 3, 4, 5,…
+$ mother_edu          &lt;dbl&gt; 4, 3, 4, 4, 3, 5, 5, 4, 5, 4, 3, 3, 3, 4, 3, 4, 5,…
+$ father_occupation   &lt;dbl&gt; 2, 2, 1, 1, 3, 1, 1, 5, 1, 3, 3, 3, 3, 3, 2, 2, 4,…
+$ mother_occupation   &lt;dbl&gt; 3, 4, 2, 1, 3, 2, 4, 3, 1, 3, 3, 3, 3, 3, 2, 2, 4,…
+$ time_friends        &lt;dbl&gt; 2, 1, 1, 2, 1, 1, 2, 2, 1, 3, 2, 2, 2, 2, 2, 1, 3,…
+$ time_social_media   &lt;dbl&gt; 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 2, 1, 2, 2, 2, 3, 4,…
+$ time_studying       &lt;dbl&gt; 5, 5, 5, 5, 1, 2, 5, 5, 5, 5, 5, 5, 5, 1, 5, 5, 5,…
+$ gpa                 &lt;dbl&gt; 4, 3, 4, 4, 4, 4, 3, 5, 5, 3, 3, 4, 4, 3, 5, 4, 4,…
+$ adapt_learning_uni  &lt;dbl&gt; 4, 3, 4, 4, 5, 4, 4, 4, 4, 3, 4, 4, 4, 5, 4, 4, 5,…
+$ study_methods       &lt;dbl&gt; 4, 3, 4, 4, 5, 4, 4, 4, 4, 4, 4, 4, 4, 5, 4, 3, 5,…
+$ support_of_uni      &lt;dbl&gt; 3, 3, 4, 5, 5, 5, 5, 5, 4, 5, 4, 4, 4, 5, 4, 4, 5,…
+$ support_of_lec      &lt;dbl&gt; 4, 4, 4, 5, 5, 4, 5, 4, 4, 5, 4, 4, 4, 5, 4, 4, 5,…
+$ facilitie_uni       &lt;dbl&gt; 4, 4, 3, 5, 5, 5, 5, 4, 4, 5, 4, 4, 4, 5, 4, 3, 5,…
+$ quality_lecturer    &lt;dbl&gt; 4, 3, 4, 5, 5, 5, 4, 5, 5, 5, 4, 4, 4, 5, 4, 4, 5,…
+$ training_curriculum &lt;dbl&gt; 4, 3, 4, 4, 5, 4, 5, 4, 4, 5, 4, 4, 4, 5, 4, 3, 5,…
+$ competitive_class   &lt;dbl&gt; 3, 3, 4, 4, 4, 3, 4, 3, 4, 4, 4, 4, 4, 5, 4, 4, 5,…
+$ infuence_f_friends  &lt;dbl&gt; 3, 4, 4, 4, 5, 3, 5, 4, 4, 4, 4, 4, 4, 5, 4, 5, 4,…</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>required_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"year"</span>,<span class="st">"gender"</span>,<span class="st">"policy_stu"</span>,<span class="st">"minority_stu"</span>,<span class="st">"poor_stu"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"father_edu"</span>,<span class="st">"mother_edu"</span>,<span class="st">"father_occupation"</span>,<span class="st">"mother_occupation"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"time_friends"</span>,<span class="st">"time_social_media"</span>,<span class="st">"time_studying"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"gpa"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"adapt_learning_uni"</span>,<span class="st">"study_methods"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"support_of_uni"</span>,<span class="st">"support_of_lec"</span>,<span class="st">"facilitie_uni"</span>,<span class="st">"quality_lecturer"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"training_curriculum"</span>,<span class="st">"competitive_class"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># peer influence column name may differ slightly across files</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"peer_influence_col_placeholder"</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Robust detection for "peer influence" column (common typos in dataset) ----</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>peer_candidates <span class="ot">&lt;-</span> <span class="fu">names</span>(df_raw)[<span class="fu">str_detect</span>(<span class="fu">names</span>(df_raw), <span class="st">"influ|infu.*friend"</span>)]</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(peer_candidates) <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  df_raw <span class="ot">&lt;-</span> df_raw <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">infuence_f_friends =</span> <span class="fu">all_of</span>(peer_candidates))</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (<span class="st">"infuence_f_friends"</span> <span class="sc">%in%</span> <span class="fu">names</span>(df_raw)) {</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># already correct</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (<span class="st">"infuencef_friends"</span> <span class="sc">%in%</span> <span class="fu">names</span>(df_raw)) {</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  df_raw <span class="ot">&lt;-</span> df_raw <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">infuence_f_friends =</span> infuencef_friends)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>required_cols <span class="ot">&lt;-</span> required_cols <span class="sc">%&gt;%</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace</span>(required_cols <span class="sc">==</span> <span class="st">"peer_influence_col_placeholder"</span>, <span class="st">"infuence_f_friends"</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>missing_cols <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(required_cols, <span class="fu">names</span>(df_raw))</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(missing_cols) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stop</span>(</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Missing required columns after clean_names(): "</span>,</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(missing_cols, <span class="at">collapse =</span> <span class="st">", "</span>),</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>      <span class="st">"</span><span class="sc">\n\n</span><span class="st">Available columns are:</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(<span class="fu">names</span>(df_raw), <span class="at">collapse =</span> <span class="st">", "</span>)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co"># quick peek</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(df_raw)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-processing-strategy-feature-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="data-processing-strategy-feature-engineering">2.3 Data processing strategy &amp; feature engineering</h2>
+<section id="coerce-coded-fields-to-numeric-minimal-explicit" class="level3">
+<h3 class="anchored" data-anchor-id="coerce-coded-fields-to-numeric-minimal-explicit">2.3.1 Coerce coded fields to numeric (minimal, explicit)</h3>
+<p>The survey fields are recorded as coded integers. We parse them into integers first (to avoid factor coercion pitfalls), then recode into labelled ordered factors in the next step.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Column data types (after cleaning + coercion)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">class</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">year</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">policy_stu</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">minority_stu</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">poor_stu</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">father_edu</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mother_edu</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">father_occupation</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mother_occupation</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">time_friends</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">time_social_media</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">time_studying</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gpa</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">adapt_learning_uni</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">study_methods</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">support_of_uni</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">support_of_lec</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">facilitie_uni</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">quality_lecturer</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">training_curriculum</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">competitive_class</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">infuence_f_friends</td>
+<td style="text-align: left;">integer</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Top 15 variables by missing rate</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">missing_rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">year</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">gender</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">policy_stu</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">minority_stu</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">poor_stu</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">father_edu</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mother_edu</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">father_occupation</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mother_occupation</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">time_friends</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">time_social_media</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">time_studying</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gpa</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">adapt_learning_uni</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">study_methods</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>coded_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"year"</span>,<span class="st">"gender"</span>,<span class="st">"policy_stu"</span>,<span class="st">"minority_stu"</span>,<span class="st">"poor_stu"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"father_edu"</span>,<span class="st">"mother_edu"</span>,<span class="st">"father_occupation"</span>,<span class="st">"mother_occupation"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"time_friends"</span>,<span class="st">"time_social_media"</span>,<span class="st">"time_studying"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"gpa"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"adapt_learning_uni"</span>,<span class="st">"study_methods"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"support_of_uni"</span>,<span class="st">"support_of_lec"</span>,<span class="st">"facilitie_uni"</span>,<span class="st">"quality_lecturer"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"training_curriculum"</span>,<span class="st">"competitive_class"</span>,<span class="st">"infuence_f_friends"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>df_raw2 <span class="ot">&lt;-</span> df_raw <span class="sc">%&gt;%</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_of</span>(coded_cols),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> readr<span class="sc">::</span><span class="fu">parse_number</span>(<span class="fu">as.character</span>(.x)) <span class="sc">%&gt;%</span> <span class="fu">as.integer</span>()</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>header_types <span class="ot">&lt;-</span> <span class="fu">sapply</span>(df_raw2, class)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">variable =</span> <span class="fu">names</span>(header_types), <span class="at">class =</span> <span class="fu">as.character</span>(header_types)),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Column data types (after cleaning + coercion)"</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>missing_rate <span class="ot">&lt;-</span> df_raw2 <span class="sc">%&gt;%</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(.x)))) <span class="sc">%&gt;%</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"missing_rate"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(missing_rate))</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(missing_rate, <span class="dv">15</span>), <span class="at">caption =</span> <span class="st">"Top 15 variables by missing rate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="recode-coded-fields-into-labelled-ordered-factors" class="level3">
+<h3 class="anchored" data-anchor-id="recode-coded-fields-into-labelled-ordered-factors">2.3.2 Recode coded fields into labelled ordered factors</h3>
+<p>We keep GPA as an ordered factor (ordinal outcome). Other ordinal items are also encoded as ordered factors to preserve survey scale meaning.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">df</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">2170</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">22</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">factor</td>
+<td style="text-align: left;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: left;">ordered</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: left;">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">year</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Gra: 1594, Fou: 441, Thi: 135, Fir: 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">gender</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Fem: 1930, Mal: 240</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">policy_stu</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">No: 1404, Yes: 766</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">minority_stu</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">No: 2041, Yes: 129</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">poor_stu</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">No: 2084, Yes: 86</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">father_edu</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Uni: 643, Hig: 603, Col: 370, Sec: 274</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mother_edu</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Hig: 592, Uni: 502, Col: 495, Sec: 294</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">father_occupation</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Fre: 650, Sel: 565, Gov: 514, Oth: 409</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mother_occupation</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Fre: 695, Sel: 557, Gov: 491, Oth: 405</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">time_friends</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">1-&lt;: 785, 2-&lt;: 590, &lt;1h: 557, 3-&lt;: 152</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">time_social_media</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">1-&lt;: 735, 2-&lt;: 634, 3-&lt;: 306, &gt;=4: 266</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">time_studying</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">&gt;=8: 1783, 6-&lt;: 245, 4-&lt;: 78, 2-&lt;: 47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gpa</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">2.5: 1189, 3.2: 692, 2.0: 109, &gt;=3: 107</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">adapt_learning_uni</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">3: 954, 4: 606, 5: 388, 2: 152</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">study_methods</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">3: 869, 4: 674, 5: 474, 2: 120</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">support_of_uni</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">5: 830, 4: 675, 3: 553, 2: 61</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">support_of_lec</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">5: 968, 4: 706, 3: 448, 2: 28</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">facilitie_uni</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">5: 927, 4: 677, 3: 399, 2: 131</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">quality_lecturer</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">5: 1152, 4: 636, 3: 342, 2: 24</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">training_curriculum</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">5: 869, 4: 779, 3: 465, 2: 45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">competitive_class</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">4: 772, 5: 680, 3: 629, 2: 76</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">infuence_f_friends</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">4: 797, 3: 707, 5: 564, 2: 82</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_raw2 <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">factor</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>      year, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"First-year"</span>,<span class="st">"Second-year"</span>,<span class="st">"Third-year"</span>,<span class="st">"Fourth-year"</span>,<span class="st">"Graduated"</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>)),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">minority_stu =</span> <span class="fu">factor</span>(minority_stu, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>)),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">policy_stu   =</span> <span class="fu">factor</span>(policy_stu,   <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>)),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">poor_stu     =</span> <span class="fu">factor</span>(poor_stu,     <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>)),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">father_edu =</span> <span class="fu">factor</span>(</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>      father_edu, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Primary"</span>,<span class="st">"Secondary"</span>,<span class="st">"High school"</span>,<span class="st">"College"</span>,<span class="st">"University/Grad"</span>,<span class="st">"Other"</span>),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">mother_edu =</span> <span class="fu">factor</span>(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      mother_edu, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Primary"</span>,<span class="st">"Secondary"</span>,<span class="st">"High school"</span>,<span class="st">"College"</span>,<span class="st">"University/Grad"</span>,<span class="st">"Other"</span>),</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">father_occupation =</span> <span class="fu">factor</span>(</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>      father_occupation, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Gov employee"</span>,<span class="st">"Self-employment"</span>,<span class="st">"Freelance"</span>,<span class="st">"Other"</span>,<span class="st">"Not public"</span>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">mother_occupation =</span> <span class="fu">factor</span>(</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>      mother_occupation, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Gov employee"</span>,<span class="st">"Self-employment"</span>,<span class="st">"Freelance"</span>,<span class="st">"Other"</span>,<span class="st">"Not public"</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">time_friends =</span> <span class="fu">factor</span>(</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>      time_friends, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"&lt;1h"</span>,<span class="st">"1-&lt;2h"</span>,<span class="st">"2-&lt;3h"</span>,<span class="st">"3-&lt;4h"</span>,<span class="st">"&gt;=4h"</span>),</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">time_social_media =</span> <span class="fu">factor</span>(</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>      time_social_media, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"&lt;1h"</span>,<span class="st">"1-&lt;2h"</span>,<span class="st">"2-&lt;3h"</span>,<span class="st">"3-&lt;4h"</span>,<span class="st">"&gt;=4h"</span>),</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">time_studying =</span> <span class="fu">factor</span>(</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>      time_studying, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"&lt;2h"</span>,<span class="st">"2-&lt;4h"</span>,<span class="st">"4-&lt;6h"</span>,<span class="st">"6-&lt;8h"</span>,<span class="st">"&gt;=8h"</span>),</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">gpa =</span> <span class="fu">factor</span>(</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>      gpa, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"&lt;2.0 (Poor)"</span>,<span class="st">"2.0-&lt;2.5 (Average)"</span>,<span class="st">"2.5-&lt;3.2 (Fair)"</span>,<span class="st">"3.2-&lt;3.6 (Good)"</span>,<span class="st">"&gt;=3.6 (Excellent)"</span>),</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(adapt_learning_uni, study_methods, support_of_uni, support_of_lec,</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>        facilitie_uni, quality_lecturer, training_curriculum,</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>        competitive_class, infuence_f_friends),</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">labels =</span> <span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="feature-engineering-transparent-proxy-indices-for-stratificationcomparison" class="level3">
+<h3 class="anchored" data-anchor-id="feature-engineering-transparent-proxy-indices-for-stratificationcomparison">2.3.3 Feature engineering: transparent proxy indices (for stratification/comparison)</h3>
+<ul>
+<li><p>SES_index: parents’ education (father + mother), used to form Low/Mid/High tertiles.</p></li>
+<li><p>Support_index: perceived institutional environment (uni + lecturer support + facilities + lecturer quality).</p></li>
+<li><p>Engagement_index: learning engagement proxy (adaptation + study methods + study time).</p></li>
+</ul>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 6
+  gpa               gpa_n ses_index ses_group engagement_index support_index
+  &lt;ord&gt;             &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;                &lt;dbl&gt;         &lt;dbl&gt;
+1 3.2-&lt;3.6 (Good)       4         8 Mid SES               4.33          3.75
+2 2.5-&lt;3.2 (Fair)       3         6 Low SES               3.67          3.5 
+3 3.2-&lt;3.6 (Good)       4         8 Mid SES               4.33          3.75
+4 3.2-&lt;3.6 (Good)       4         9 Mid SES               4.33          5   
+5 3.2-&lt;3.6 (Good)       4         5 Low SES               3.67          5   
+6 3.2-&lt;3.6 (Good)       4        10 High SES              3.33          4.75
+7 2.5-&lt;3.2 (Fair)       3        11 High SES              4.33          4.75
+8 &gt;=3.6 (Excellent)     5         9 Mid SES               4.33          4.5 </code></pre>
+</div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>SES group distribution (tertiles)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">ses_group</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">pct</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Low SES</td>
+<td style="text-align: right;">724</td>
+<td style="text-align: right;">0.334</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mid SES</td>
+<td style="text-align: right;">723</td>
+<td style="text-align: right;">0.333</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">High SES</td>
+<td style="text-align: right;">723</td>
+<td style="text-align: right;">0.333</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">gpa_n        =</span> <span class="fu">as.numeric</span>(gpa),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">father_edu_n =</span> <span class="fu">as.numeric</span>(father_edu),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mother_edu_n =</span> <span class="fu">as.numeric</span>(mother_edu),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">adapt_n    =</span> <span class="fu">as.numeric</span>(adapt_learning_uni),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">method_n   =</span> <span class="fu">as.numeric</span>(study_methods),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">study_n    =</span> <span class="fu">as.numeric</span>(time_studying),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">uni_sup_n  =</span> <span class="fu">as.numeric</span>(support_of_uni),</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">lec_sup_n  =</span> <span class="fu">as.numeric</span>(support_of_lec),</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">faci_n     =</span> <span class="fu">as.numeric</span>(facilitie_uni),</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">lectq_n    =</span> <span class="fu">as.numeric</span>(quality_lecturer),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ses_index =</span> father_edu_n <span class="sc">+</span> mother_edu_n,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">engagement_index =</span> <span class="fu">rowMeans</span>(<span class="fu">cbind</span>(adapt_n, method_n, study_n), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">support_index    =</span> <span class="fu">rowMeans</span>(<span class="fu">cbind</span>(uni_sup_n, lec_sup_n, faci_n, lectq_n), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">ses_group =</span> <span class="fu">ntile</span>(ses_index, <span class="dv">3</span>),</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">ses_group =</span> <span class="fu">factor</span>(ses_group, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Low SES"</span>,<span class="st">"Mid SES"</span>,<span class="st">"High SES"</span>))</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="eda-quality-checks-aligned-to-the-outcome-centric-framing" class="level2">
+<h2 class="anchored" data-anchor-id="eda-quality-checks-aligned-to-the-outcome-centric-framing">2.4 EDA (quality checks aligned to the outcome-centric framing)</h2>
+<section id="missingness-overview-to-assess-reliability-of-downstream-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="missingness-overview-to-assess-reliability-of-downstream-comparisons">2.4.1 Missingness overview (to assess reliability of downstream comparisons)</h3>
+<p>A preliminary inspection shows negligible missingness across core variables (all &lt;1%), suggesting that downstream subgroup comparisons are unlikely to be biased by incomplete records.</p>
+</section>
+<section id="baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome" class="level3">
+<h3 class="anchored" data-anchor-id="baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome">2.4.2 Baseline outcome check: GPA band counts (sanity check for ordinal outcome)</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>gpa_counts <span class="ot">&lt;-</span> df2 <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(gpa) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gpa_counts, <span class="fu">aes</span>(<span class="at">x =</span> gpa, <span class="at">y =</span> prop)) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Baseline distribution of GPA bands (count-normalised)"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"GPA band"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">15</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>Baseline EDA shows that GPA is heavily concentrated in the mid bands. The majority of students fall within 2.5–&lt;3.2 (Fair), accounting for more than half of the sample, followed by 3.2–&lt;3.6 (Good) at roughly one-third. The lower bands (&lt;2.5) and the highest band (≥3.6) each represent only a small minority. This indicates an imbalanced but ordinal distribution centred around average-to-good performance, with relatively few extreme low or high outcomes. The pattern supports treating GPA band as an ordinal outcome and suggests that subsequent modelling should account for class imbalance while preserving the natural ranking structure.</p>
+</section>
+</section>
+</section>
+<section id="analytical-visualisation" class="level1">
+<h1>3. Analytical Visualisation</h1>
+<section id="common-theme" class="level2">
+<h2 class="anchored" data-anchor-id="common-theme">Common theme</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="visualisation-1-baseline-distribution-of-gpa-ggdist" class="level2">
+<h2 class="anchored" data-anchor-id="visualisation-1-baseline-distribution-of-gpa-ggdist">Visualisation 1 — Baseline distribution of GPA (ggdist)</h2>
+<p>Steps taken:</p>
+<ol type="1">
+<li><p>Use ordinal mapping <code>gpa_n</code> converted from <code>gpa</code> (ordered factor).</p></li>
+<li><p>Use <code>stat_halfeye()</code> to show the distribution and central mass.</p></li>
+</ol>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df2, <span class="fu">aes</span>(<span class="at">x =</span> gpa_n)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_halfeye</span>(<span class="at">adjust =</span> <span class="fl">0.7</span>, <span class="at">.width =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">levels</span>(df2<span class="sc">$</span>gpa)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Overall distribution of GPA (ordinal bands)"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"GPA band"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>The baseline distribution of GPA shows a clear concentration in the mid-performance bands. Most observations fall within the “2.5–&lt;3.2 (Fair)” and “3.2–&lt;3.6 (Good)” categories, indicating that the majority of students achieve moderate to relatively strong academic outcomes. The density mass is visibly highest around the Fair band, while the lower (&lt;2.0) and highest (≥3.6) bands contain comparatively fewer students. The central interval highlights that GPA values are not evenly distributed but cluster within a relatively narrow academic range. This suggests limited polarization in performance and provides a stable reference point for subsequent subgroup comparisons (e.g., by socioeconomic background, study behaviour, or institutional support).</p>
+</section>
+<section id="visualisation-2-developmental-structure-year-vs-gpa" class="level2">
+<h2 class="anchored" data-anchor-id="visualisation-2-developmental-structure-year-vs-gpa">Visualisation 2 — Developmental structure: Year vs GPA</h2>
+<p>Steps taken:</p>
+<ol type="1">
+<li><p>Compare GPA distribution across academic years.</p></li>
+<li><p>Use proportional stacked bars for structural clarity. 3. Interpret risk concentration patterns.</p></li>
+</ol>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>p_year <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df2, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">fill =</span> gpa)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Proportional distribution of GPA bands across academic years"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Academic Year"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion within year"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"GPA band"</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>p_year</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>Across academic years, GPA bands remain concentrated in the 2.5–3.2 (Fair) range, suggesting structural stability in overall performance distribution. However, the Graduated group shows a visibly higher proportion in the 3.2–3.6 (Good) band and a slight increase in the ≥3.6 (Excellent) segment. In contrast, Fourth-year students display relatively more concentration in the mid bands. This pattern may indicate mild positive selection or performance consolidation toward graduation, rather than dramatic academic mobility across years.</p>
+</section>
+<section id="visualisation-3-equity-lens-minority-status-vs-gpa" class="level2">
+<h2 class="anchored" data-anchor-id="visualisation-3-equity-lens-minority-status-vs-gpa">Visualisation 3 — Equity lens: Minority status vs GPA</h2>
+<p>Steps taken:</p>
+<ol type="1">
+<li><p>Compare GPA distribution by minority status.</p></li>
+<li><p>Use proportional stacked bars to show structural differences.</p></li>
+<li><p>Evaluate concentration of lower GPA bands.</p></li>
+</ol>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>p_minority <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df2, <span class="fu">aes</span>(<span class="at">x =</span> minority_stu, <span class="at">fill =</span> gpa)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Proportional distribution of GPA bands by minority status"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Minority status"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion within group"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"GPA band"</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>p_minority</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>Clear structural disparities emerge by minority status. Non-minority students show a higher proportion in the 3.2–3.6 (Good) and ≥3.6 (Excellent) bands, while minority students are more concentrated in the 2.5–3.2 (Fair) range. Although extreme low performance (&lt;2.0) remains limited in both groups, the upward distribution shift among non-minority students suggests persistent performance gaps. The pattern signals potential equity concerns and highlights the importance of examining structural and institutional factors associated with academic outcomes.</p>
+</section>
+<section id="visualisation-4-structural-disparity-ses-vs-gpa" class="level2">
+<h2 class="anchored" data-anchor-id="visualisation-4-structural-disparity-ses-vs-gpa">Visualisation 4 — Structural disparity: SES vs GPA</h2>
+<p>Steps taken:</p>
+<ol type="1">
+<li><p>Build SES proxy from parents’ education (father_edu + mother_edu).</p></li>
+<li><p>Split into Low/Mid/High SES tertiles based on ses_index.</p></li>
+<li><p>Compare GPA bands across SES groups.</p></li>
+</ol>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If ses_group is not yet created in df2, you can build it robustly as follows:</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2 <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ses_group =</span> <span class="cf">if</span> (<span class="sc">!</span><span class="st">"ses_group"</span> <span class="sc">%in%</span> <span class="fu">names</span>(df2)) {</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cut</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        ses_index,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="fu">quantile</span>(ses_index, <span class="at">probs =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">1</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">include.lowest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Low SES"</span>, <span class="st">"Mid SES"</span>, <span class="st">"High SES"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> ses_group</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df2, <span class="fu">aes</span>(<span class="at">x =</span> ses_group, <span class="at">y =</span> gpa_n)) <span class="sc">+</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.55</span>, <span class="at">outlier.alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">alpha =</span> <span class="fl">0.10</span>) <span class="sc">+</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">labels =</span> <span class="fu">levels</span>(df2<span class="sc">$</span>gpa)) <span class="sc">+</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"GPA differences across SES groups (parental education proxy)"</span>,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"SES group (tertiles)"</span>,</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"GPA band"</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>p2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>Students from higher SES backgrounds (measured by parental education) show a modest upward shift in GPA distribution. While all three groups concentrate in the “Fair” to “Good” bands, the High SES group displays slightly more observations in the “Good” and “Excellent” categories and fewer in the lower bands. Median GPA appears marginally higher for Mid and High SES relative to Low SES, though the distributions substantially overlap. This suggests that parental education is associated with academic outcomes, but the disparity is moderate rather than sharply segmented, indicating SES may influence performance without fully determining it.</p>
+</section>
+<section id="visualisation-5-behavioural-correlates-study-time-vs-social-media-time-patchwork" class="level2">
+<h2 class="anchored" data-anchor-id="visualisation-5-behavioural-correlates-study-time-vs-social-media-time-patchwork">Visualisation 5 — Behavioural correlates: study time vs social media time (patchwork)</h2>
+<p>Steps taken:</p>
+<ol type="1">
+<li><p>Compare GPA by time_studying.</p></li>
+<li><p>Compare GPA by time_social_media.</p></li>
+<li><p>Place side-by-side for interpretability.</p></li>
+</ol>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Safety check</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">c</span>(<span class="st">"gpa"</span>,<span class="st">"gpa_n"</span>,<span class="st">"time_studying"</span>,<span class="st">"time_social_media"</span>) <span class="sc">%in%</span> <span class="fu">names</span>(df2))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>p_study <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df2, <span class="fu">aes</span>(<span class="at">x =</span> time_studying, <span class="at">y =</span> gpa_n)) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.6</span>, <span class="at">outlier.alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">alpha =</span> <span class="fl">0.10</span>) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">labels =</span> <span class="fu">levels</span>(df2<span class="sc">$</span>gpa)) <span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"GPA by Study Time"</span>,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Daily study time (ordinal)"</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"GPA band"</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>p_social <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df2, <span class="fu">aes</span>(<span class="at">x =</span> time_social_media, <span class="at">y =</span> gpa_n)) <span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.6</span>, <span class="at">outlier.alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">alpha =</span> <span class="fl">0.10</span>) <span class="sc">+</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">labels =</span> <span class="fu">levels</span>(df2<span class="sc">$</span>gpa)) <span class="sc">+</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"GPA by Social Media Time"</span>,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Daily social media time (ordinal)"</span>,</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"GPA band"</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>(p_study <span class="sc">|</span> p_social) <span class="sc">+</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">"Behavioural correlates associated with GPA (comparative view)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>The left panel shows a clearer monotonic gradient for study time: as daily study hours increase, the central mass of GPA shifts upward, with higher proportions of “Good” and “Excellent” bands concentrated in the ≥6h and ≥8h groups. Lower study-time categories display greater dispersion toward the lower GPA bands. In contrast, the social media panel shows weaker structural separation. GPA distributions across usage categories overlap substantially, and higher usage does not consistently correspond to lower performance. Although heavy users show slightly more variability and occasional concentration in lower bands, the shift is modest relative to study time. Overall, study time demonstrates a stronger and more systematic behavioural association with GPA, suggesting that academic effort allocation is a more reliable and actionable correlate than simply reducing social media exposure.</p>
+</section>
+<section id="visualisation-6-institutional-support-as-a-moderator-poor-vs-non-poor" class="level2">
+<h2 class="anchored" data-anchor-id="visualisation-6-institutional-support-as-a-moderator-poor-vs-non-poor">Visualisation 6 — Institutional support as a moderator (poor vs non-poor)</h2>
+<p>Steps taken:</p>
+<ol type="1">
+<li><p>Build support_index from institutional environment items.</p></li>
+<li><p>Compare relationship with GPA.</p></li>
+<li><p>Facet by poor_stu to reveal potential moderation.</p></li>
+</ol>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Required columns check</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>req_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"poor_stu"</span>,<span class="st">"gpa"</span>,<span class="st">"gpa_n"</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"support_of_uni"</span>,<span class="st">"support_of_lec"</span>,<span class="st">"facilitie_uni"</span>,<span class="st">"quality_lecturer"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(req_cols <span class="sc">%in%</span> <span class="fu">names</span>(df2)))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create support_index if not already present</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"support_index"</span> <span class="sc">%in%</span> <span class="fu">names</span>(df2))) {</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  df2 <span class="ot">&lt;-</span> df2 <span class="sc">%&gt;%</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">support_index =</span> <span class="fu">rowMeans</span>(</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(support_of_uni, support_of_lec, facilitie_uni, quality_lecturer),</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>               <span class="sc">~</span> <span class="fu">as.numeric</span>(.x)),</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df2, <span class="fu">aes</span>(<span class="at">x =</span> support_index, <span class="at">y =</span> gpa_n)) <span class="sc">+</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.18</span>) <span class="sc">+</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> poor_stu) <span class="sc">+</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">labels =</span> <span class="fu">levels</span>(df2<span class="sc">$</span>gpa)) <span class="sc">+</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Institutional support and GPA: comparison by poverty status"</span>,</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Support index (avg of Uni/Lecturer/Facilities/Quality)"</span>,</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"GPA band"</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>p4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>This figure examines whether perceived institutional support aligns with GPA and whether the pattern differs by poverty status. Among non-poor students, the relationship between support_index and GPA appears mildly positive: higher perceived support corresponds to slightly higher GPA bands, though dispersion remains wide. For poor-household students, the pattern is more volatile and less clearly positive, suggesting that support alone may not uniformly translate into higher performance within this group. The divergence between panels is consistent with a moderation interpretation: institutional support may operate differently depending on socioeconomic background. From a policy perspective, this implies that while strengthening teaching quality and learning facilities benefits the broader student body, disadvantaged students may require more targeted or complementary interventions (e.g., mentoring, financial stability, structured academic guidance) for support mechanisms to effectively translate into improved academic outcomes.</p>
+</section>
+<section id="visualisation-7-engagement-segmentation-by-gpa-ggridges" class="level2">
+<h2 class="anchored" data-anchor-id="visualisation-7-engagement-segmentation-by-gpa-ggridges">Visualisation 7 — Engagement segmentation by GPA (ggridges)</h2>
+<p>Steps taken:</p>
+<ol type="1">
+<li><p>Build engagement_index from adaptation + study methods + study time.</p></li>
+<li><p>Use ridge densities to compare engagement distributions across GPA bands.</p></li>
+</ol>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false" href="">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-12-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-12-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df2, <span class="fu">aes</span>(<span class="at">x =</span> engagement_index, <span class="at">y =</span> gpa, <span class="at">fill =</span> gpa)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  ggridges<span class="sc">::</span><span class="fu">geom_density_ridges</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">scale =</span> <span class="fl">1.05</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Engagement index distribution by GPA band"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Engagement index (avg of Adaptation + Study Methods + Study Time)"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"GPA band"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>p5</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>The ridge plot presents a segmentation-style view of engagement across GPA bands. The distributions shift progressively to the right as GPA increases, indicating that higher-performing students tend to report stronger adaptation to university learning, more effective study methods, and greater study time (as captured by the composite engagement index). Although the ridges overlap—showing that engagement does not perfectly determine performance—the gradient is clear: lower GPA bands concentrate more mass at lower engagement values, while “Good” and “Excellent” groups cluster at higher engagement levels. This pattern supports engagement as a meaningful and actionable correlate of academic outcomes. For intervention design, it suggests prioritising structured engagement-building strategies, particularly for students concentrated in the lower-left portion of the distribution.</p>
+</section>
+<section id="insight-synthesis-7-step-analytical-progression" class="level2">
+<h2 class="anchored" data-anchor-id="insight-synthesis-7-step-analytical-progression">Insight synthesis (7-step analytical progression)</h2>
+<ol type="1">
+<li><p>Baseline: GPA is concentrated in mid-to-upper bands; improvement is best framed as moving students up one ordinal band.</p></li>
+<li><p>Developmental: Lower GPA risk mass is more concentrated in earlier academic years, indicating a transition window for early interventions.</p></li>
+<li><p>Equity: Minority-status comparison reveals whether learning outcome distributions differ structurally across identity groups.</p></li>
+<li><p>Disparity: SES groups differ; Low SES carries higher risk mass in lower GPA bands.</p></li>
+<li><p>Behaviour: Study time aligns more consistently with GPA than social media time.</p></li>
+<li><p>Moderation: Institutional support shows stronger alignment with GPA among poor-household students.</p></li>
+<li><p>Segmentation: Engagement distributions shift with GPA, providing a profile-based lens for interventions.</p></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
