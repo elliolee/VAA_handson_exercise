@@ -1048,7 +1048,7 @@ The ridge plot presents a segmentation-style view of engagement across GPA bands
 
 1.  Baseline: GPA is concentrated in mid-to-upper bands; improvement is best framed as moving students up one ordinal band.
 
-2.  Developmental: Lower GPA risk mass is more concentrated in earlier academic years, indicating a transition window for early interventions.
+2.  Developmental: GPA distributions are broadly stable across academic years, with a modest upward shift toward the “Good/Excellent” bands in the Graduated group.
 
 3.  Equity: Minority-status comparison reveals whether learning outcome distributions differ structurally across identity groups.
 
@@ -1056,7 +1056,7 @@ The ridge plot presents a segmentation-style view of engagement across GPA bands
 
 5.  Behaviour: Study time aligns more consistently with GPA than social media time.
 
-6.  Moderation: Institutional support shows stronger alignment with GPA among poor-household students.
+6.  Moderation: Institutional support shows clearer alignment with GPA among non-poor students, while the association appears weaker and more volatile among poor-household students.
 
 7.  Segmentation: Engagement distributions shift with GPA, providing a profile-based lens for interventions.
 
