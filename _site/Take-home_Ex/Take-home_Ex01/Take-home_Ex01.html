@@ -208,23 +208,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#context-analytical-framing" id="toc-context-analytical-framing" class="nav-link" data-scroll-target="#context-analytical-framing">1.1 Context &amp; Analytical Framing</a></li>
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">1.2 Objectives</a></li>
   </ul></li>
-  <li><a href="#data-pre-processing-data-exploration" id="toc-data-pre-processing-data-exploration" class="nav-link" data-scroll-target="#data-pre-processing-data-exploration">2. Data Pre-processing &amp; Data Exploration</a>
+  <li><a href="#methodology-and-data-preparation-overview" id="toc-methodology-and-data-preparation-overview" class="nav-link" data-scroll-target="#methodology-and-data-preparation-overview">2. Methodology and Data Preparation Overview</a></li>
+  <li><a href="#data-pre-processing-data-exploration" id="toc-data-pre-processing-data-exploration" class="nav-link" data-scroll-target="#data-pre-processing-data-exploration">3. Data Pre-processing &amp; Data Exploration</a>
   <ul class="collapse">
-  <li><a href="#loading-data-relevant-libraries" id="toc-loading-data-relevant-libraries" class="nav-link" data-scroll-target="#loading-data-relevant-libraries">2.1 Loading data &amp; relevant libraries</a></li>
-  <li><a href="#quick-structure-checks" id="toc-quick-structure-checks" class="nav-link" data-scroll-target="#quick-structure-checks">2.2 Quick structure checks</a></li>
-  <li><a href="#data-processing-strategy-feature-engineering" id="toc-data-processing-strategy-feature-engineering" class="nav-link" data-scroll-target="#data-processing-strategy-feature-engineering">2.3 Data processing strategy &amp; feature engineering</a>
+  <li><a href="#loading-data-relevant-libraries" id="toc-loading-data-relevant-libraries" class="nav-link" data-scroll-target="#loading-data-relevant-libraries">3.1 Loading data &amp; relevant libraries</a></li>
+  <li><a href="#quick-structure-checks" id="toc-quick-structure-checks" class="nav-link" data-scroll-target="#quick-structure-checks">3.2 Quick structure checks</a></li>
+  <li><a href="#data-processing-strategy-feature-engineering" id="toc-data-processing-strategy-feature-engineering" class="nav-link" data-scroll-target="#data-processing-strategy-feature-engineering">3.3 Data processing strategy &amp; feature engineering</a>
   <ul class="collapse">
-  <li><a href="#coerce-coded-fields-to-numeric-minimal-explicit" id="toc-coerce-coded-fields-to-numeric-minimal-explicit" class="nav-link" data-scroll-target="#coerce-coded-fields-to-numeric-minimal-explicit">2.3.1 Coerce coded fields to numeric (minimal, explicit)</a></li>
-  <li><a href="#recode-coded-fields-into-labelled-ordered-factors" id="toc-recode-coded-fields-into-labelled-ordered-factors" class="nav-link" data-scroll-target="#recode-coded-fields-into-labelled-ordered-factors">2.3.2 Recode coded fields into labelled ordered factors</a></li>
-  <li><a href="#feature-engineering-transparent-proxy-indices-for-stratificationcomparison" id="toc-feature-engineering-transparent-proxy-indices-for-stratificationcomparison" class="nav-link" data-scroll-target="#feature-engineering-transparent-proxy-indices-for-stratificationcomparison">2.3.3 Feature engineering: transparent proxy indices (for stratification/comparison)</a></li>
+  <li><a href="#coerce-coded-fields-to-numeric-minimal-explicit" id="toc-coerce-coded-fields-to-numeric-minimal-explicit" class="nav-link" data-scroll-target="#coerce-coded-fields-to-numeric-minimal-explicit">3.3.1 Coerce coded fields to numeric (minimal, explicit)</a></li>
+  <li><a href="#recode-coded-fields-into-labelled-ordered-factors" id="toc-recode-coded-fields-into-labelled-ordered-factors" class="nav-link" data-scroll-target="#recode-coded-fields-into-labelled-ordered-factors">3.3.2 Recode coded fields into labelled ordered factors</a></li>
+  <li><a href="#feature-engineering-transparent-proxy-indices-for-stratificationcomparison" id="toc-feature-engineering-transparent-proxy-indices-for-stratificationcomparison" class="nav-link" data-scroll-target="#feature-engineering-transparent-proxy-indices-for-stratificationcomparison">3.3.3 Feature engineering: transparent proxy indices (for stratification/comparison)</a></li>
   </ul></li>
   <li><a href="#eda-quality-checks-aligned-to-the-outcome-centric-framing" id="toc-eda-quality-checks-aligned-to-the-outcome-centric-framing" class="nav-link" data-scroll-target="#eda-quality-checks-aligned-to-the-outcome-centric-framing">2.4 EDA (quality checks aligned to the outcome-centric framing)</a>
   <ul class="collapse">
   <li><a href="#missingness-overview-to-assess-reliability-of-downstream-comparisons" id="toc-missingness-overview-to-assess-reliability-of-downstream-comparisons" class="nav-link" data-scroll-target="#missingness-overview-to-assess-reliability-of-downstream-comparisons">2.4.1 Missingness overview (to assess reliability of downstream comparisons)</a></li>
-  <li><a href="#baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome" id="toc-baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome" class="nav-link" data-scroll-target="#baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome">2.4.2 Baseline outcome check: GPA band counts (sanity check for ordinal outcome)</a></li>
+  <li><a href="#baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome" id="toc-baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome" class="nav-link" data-scroll-target="#baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome">3.4.2 Baseline outcome check: GPA band counts (sanity check for ordinal outcome)</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#analytical-visualisation" id="toc-analytical-visualisation" class="nav-link" data-scroll-target="#analytical-visualisation">3. Analytical Visualisation</a>
+  <li><a href="#analytical-visualisation" id="toc-analytical-visualisation" class="nav-link" data-scroll-target="#analytical-visualisation">4. Analytical Visualisation</a>
   <ul class="collapse">
   <li><a href="#common-theme" id="toc-common-theme" class="nav-link" data-scroll-target="#common-theme">Common theme</a></li>
   <li><a href="#visualisation-1-baseline-distribution-of-gpa-ggdist" id="toc-visualisation-1-baseline-distribution-of-gpa-ggdist" class="nav-link" data-scroll-target="#visualisation-1-baseline-distribution-of-gpa-ggdist">Visualisation 1 — Baseline distribution of GPA (ggdist)</a></li>
@@ -236,6 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#visualisation-7-engagement-segmentation-by-gpa-ggridges" id="toc-visualisation-7-engagement-segmentation-by-gpa-ggridges" class="nav-link" data-scroll-target="#visualisation-7-engagement-segmentation-by-gpa-ggridges">Visualisation 7 — Engagement segmentation by GPA (ggridges)</a></li>
   <li><a href="#insight-synthesis-7-step-analytical-progression" id="toc-insight-synthesis-7-step-analytical-progression" class="nav-link" data-scroll-target="#insight-synthesis-7-step-analytical-progression">Insight synthesis (7-step analytical progression)</a></li>
   </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">5. Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -323,10 +325,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 </section>
 </section>
+<section id="methodology-and-data-preparation-overview" class="level1">
+<h1>2. Methodology and Data Preparation Overview</h1>
+<p>This analysis follows a structured, reproducible workflow designed to preserve the ordinal structure of the survey data while ensuring interpretability and analytical transparency.</p>
+<p>The data preparation process consisted of four key steps:</p>
+<p>First, column names were standardised using <code>janitor::clean_names()</code> to ensure consistency and reproducibility.</p>
+<p>Second, coded survey responses were explicitly coerced into integer format and recoded into labelled ordered factors. This step preserves the ordinal meaning of variables such as GPA bands, study time, and perceived support.</p>
+<p>Third, transparent composite proxy indices were constructed to enable structured subgroup comparison:</p>
+<ul>
+<li><strong>SES index</strong>, based on parents’ education, as a proxy for socioeconomic background.</li>
+<li><strong>Engagement index</strong>, combining adaptation, study methods, and study time.</li>
+<li><strong>Support index</strong>, reflecting perceived institutional support.</li>
+</ul>
+<p>Finally, exploratory checks were conducted to confirm data completeness, validate variable structure, and establish the baseline distribution of the outcome variable (GPA).</p>
+<p>These steps ensure that subsequent visualisations reflect the structural and ordinal nature of the data while supporting valid and interpretable comparisons.</p>
+</section>
 <section id="data-pre-processing-data-exploration" class="level1">
-<h1>2. Data Pre-processing &amp; Data Exploration</h1>
+<h1>3. Data Pre-processing &amp; Data Exploration</h1>
 <section id="loading-data-relevant-libraries" class="level2">
-<h2 class="anchored" data-anchor-id="loading-data-relevant-libraries">2.1 Loading data &amp; relevant libraries</h2>
+<h2 class="anchored" data-anchor-id="loading-data-relevant-libraries">3.1 Loading data &amp; relevant libraries</h2>
 <p>This section ensures a reproducible, minimal-transformation pipeline. In line with the analytical framing (ordinal GPA as the outcome), we (i) standardise column names, (ii) validate required variables, and (iii) recode coded fields into interpretable ordered factors. Feature engineering is limited to transparent proxy indices used for <em>stratification and comparison</em> (not causal claims).</p>
 <p>Besides tidyverse, the following packages will be used: readxl (Excel), janitor (standardise names), skimr (profiling), ggdist/ggridges (distribution visualisation), patchwork (composite plots), knitr (tables).</p>
 <div class="cell">
@@ -449,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="quick-structure-checks" class="level2">
-<h2 class="anchored" data-anchor-id="quick-structure-checks">2.2 Quick structure checks</h2>
+<h2 class="anchored" data-anchor-id="quick-structure-checks">3.2 Quick structure checks</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Code</a></li></ul>
 <div class="tab-content">
@@ -531,9 +548,9 @@ $ infuence_f_friends  &lt;dbl&gt; 3, 4, 4, 4, 5, 3, 5, 4, 4, 4, 4, 4, 4, 5, 4, 5
 </div>
 </section>
 <section id="data-processing-strategy-feature-engineering" class="level2">
-<h2 class="anchored" data-anchor-id="data-processing-strategy-feature-engineering">2.3 Data processing strategy &amp; feature engineering</h2>
+<h2 class="anchored" data-anchor-id="data-processing-strategy-feature-engineering">3.3 Data processing strategy &amp; feature engineering</h2>
 <section id="coerce-coded-fields-to-numeric-minimal-explicit" class="level3">
-<h3 class="anchored" data-anchor-id="coerce-coded-fields-to-numeric-minimal-explicit">2.3.1 Coerce coded fields to numeric (minimal, explicit)</h3>
+<h3 class="anchored" data-anchor-id="coerce-coded-fields-to-numeric-minimal-explicit">3.3.1 Coerce coded fields to numeric (minimal, explicit)</h3>
 <p>The survey fields are recorded as coded integers. We parse them into integers first (to avoid factor coercion pitfalls), then recode into labelled ordered factors in the next step.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Code</a></li></ul>
@@ -754,7 +771,7 @@ $ infuence_f_friends  &lt;dbl&gt; 3, 4, 4, 4, 5, 3, 5, 4, 4, 4, 4, 4, 4, 5, 4, 5
 </div>
 </section>
 <section id="recode-coded-fields-into-labelled-ordered-factors" class="level3">
-<h3 class="anchored" data-anchor-id="recode-coded-fields-into-labelled-ordered-factors">2.3.2 Recode coded fields into labelled ordered factors</h3>
+<h3 class="anchored" data-anchor-id="recode-coded-fields-into-labelled-ordered-factors">3.3.2 Recode coded fields into labelled ordered factors</h3>
 <p>We keep GPA as an ordered factor (ordinal outcome). Other ordinal items are also encoded as ordered factors to preserve survey scale meaning.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Code</a></li></ul>
@@ -1072,7 +1089,7 @@ $ infuence_f_friends  &lt;dbl&gt; 3, 4, 4, 4, 5, 3, 5, 4, 4, 4, 4, 4, 4, 5, 4, 5
 </div>
 </section>
 <section id="feature-engineering-transparent-proxy-indices-for-stratificationcomparison" class="level3">
-<h3 class="anchored" data-anchor-id="feature-engineering-transparent-proxy-indices-for-stratificationcomparison">2.3.3 Feature engineering: transparent proxy indices (for stratification/comparison)</h3>
+<h3 class="anchored" data-anchor-id="feature-engineering-transparent-proxy-indices-for-stratificationcomparison">3.3.3 Feature engineering: transparent proxy indices (for stratification/comparison)</h3>
 <ul>
 <li><p>SES_index: parents’ education (father + mother), used to form Low/Mid/High tertiles.</p></li>
 <li><p>Support_index: perceived institutional environment (uni + lecturer support + facilities + lecturer quality).</p></li>
@@ -1160,7 +1177,7 @@ $ infuence_f_friends  &lt;dbl&gt; 3, 4, 4, 4, 5, 3, 5, 4, 4, 4, 4, 4, 4, 5, 4, 5
 <p>A preliminary inspection shows negligible missingness across core variables (all &lt;1%), suggesting that downstream subgroup comparisons are unlikely to be biased by incomplete records.</p>
 </section>
 <section id="baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome" class="level3">
-<h3 class="anchored" data-anchor-id="baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome">2.4.2 Baseline outcome check: GPA band counts (sanity check for ordinal outcome)</h3>
+<h3 class="anchored" data-anchor-id="baseline-outcome-check-gpa-band-counts-sanity-check-for-ordinal-outcome">3.4.2 Baseline outcome check: GPA band counts (sanity check for ordinal outcome)</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Code</a></li></ul>
 <div class="tab-content">
@@ -1200,7 +1217,7 @@ $ infuence_f_friends  &lt;dbl&gt; 3, 4, 4, 4, 5, 3, 5, 4, 4, 4, 4, 4, 4, 5, 4, 5
 </section>
 </section>
 <section id="analytical-visualisation" class="level1">
-<h1>3. Analytical Visualisation</h1>
+<h1>4. Analytical Visualisation</h1>
 <section id="common-theme" class="level2">
 <h2 class="anchored" data-anchor-id="common-theme">Common theme</h2>
 <div class="cell">
@@ -1554,9 +1571,19 @@ $ infuence_f_friends  &lt;dbl&gt; 3, 4, 4, 4, 5, 3, 5, 4, 4, 4, 4, 4, 4, 5, 4, 5
 <li><p>Moderation: Institutional support shows stronger alignment with GPA among poor-household students.</p></li>
 <li><p>Segmentation: Engagement distributions shift with GPA, providing a profile-based lens for interventions.</p></li>
 </ol>
-
-
 </section>
+</section>
+<section id="conclusion" class="level1">
+<h1>5. Conclusion</h1>
+<p>This analysis examined structural, behavioural, and institutional factors associated with student learning outcomes using ordinal GPA bands as the outcome variable.</p>
+<p>Three key patterns emerge.</p>
+<p>First, academic performance is concentrated within mid-level GPA bands, suggesting that improvement is more realistically framed as incremental movement across adjacent ordinal categories rather than extreme performance shifts.</p>
+<p>Second, structural disparities are evident across socioeconomic and minority groups, with modest but consistent upward shifts in GPA associated with higher parental education and non-minority status. These findings highlight the role of background conditions in shaping academic outcomes.</p>
+<p>Third, behavioural engagement—particularly study time and overall engagement index—shows the most consistent and systematic association with GPA. In contrast, social media use demonstrates weaker structural separation.</p>
+<p>Institutional support shows mild alignment with GPA overall but appears less consistently associated among disadvantaged students, suggesting that support mechanisms may require targeted design to translate into effective academic gains.</p>
+<p>Overall, the findings suggest that engagement-building strategies and early structural support may provide the most actionable pathways for improving student learning outcomes within this population.</p>
+
+
 </section>
 
 </main> <!-- /main -->

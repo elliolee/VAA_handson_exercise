@@ -72,9 +72,30 @@ This post aims to:
 
 6.  Provide an engagement segmentation view across GPA bands to identify behavioural clustering patterns that may inform targeted intervention strategies.
 
-# 2. Data Pre-processing & Data Exploration
+# 2. Methodology and Data Preparation Overview
 
-## 2.1 Loading data & relevant libraries
+This analysis follows a structured, reproducible workflow designed to preserve the ordinal structure of the survey data while ensuring interpretability and analytical transparency.
+
+The data preparation process consisted of four key steps:
+
+First, column names were standardised using `janitor::clean_names()` to ensure consistency and reproducibility.
+
+Second, coded survey responses were explicitly coerced into integer format and recoded into labelled ordered factors. This step preserves the ordinal meaning of variables such as GPA bands, study time, and perceived support.
+
+Third, transparent composite proxy indices were constructed to enable structured subgroup comparison:
+
+* **SES index**, based on parents’ education, as a proxy for socioeconomic background.
+* **Engagement index**, combining adaptation, study methods, and study time.
+* **Support index**, reflecting perceived institutional support.
+
+Finally, exploratory checks were conducted to confirm data completeness, validate variable structure, and establish the baseline distribution of the outcome variable (GPA).
+
+These steps ensure that subsequent visualisations reflect the structural and ordinal nature of the data while supporting valid and interpretable comparisons.
+
+
+# 3. Data Pre-processing & Data Exploration
+
+## 3.1 Loading data & relevant libraries
 
 This section ensures a reproducible, minimal-transformation pipeline. In line with the analytical framing (ordinal GPA as the outcome), we (i) standardise column names, (ii) validate required variables, and (iii) recode coded fields into interpretable ordered factors. Feature engineering is limited to transparent proxy indices used for *stratification and comparison* (not causal claims).
 
@@ -99,7 +120,7 @@ name_map <- tibble(original = orig_names, cleaned = names(df_raw))
 knitr::kable(name_map, caption = "Column name mapping: original Excel → clean_names()")
 ```
 
-## 2.2 Quick structure checks
+## 3.2 Quick structure checks
 
 ::: panel-tabset
 # Plot
@@ -200,9 +221,9 @@ dplyr::glimpse(df_raw)
 ```
 :::
 
-## 2.3 Data processing strategy & feature engineering
+## 3.3 Data processing strategy & feature engineering
 
-### 2.3.1 Coerce coded fields to numeric (minimal, explicit)
+### 3.3.1 Coerce coded fields to numeric (minimal, explicit)
 
 The survey fields are recorded as coded integers. We parse them into integers first (to avoid factor coercion pitfalls), then recode into labelled ordered factors in the next step.
 
@@ -285,7 +306,7 @@ knitr::kable(head(missing_rate, 15), caption = "Top 15 variables by missing rate
 ```
 :::
 
-### 2.3.2 Recode coded fields into labelled ordered factors
+### 3.3.2 Recode coded fields into labelled ordered factors
 
 We keep GPA as an ordered factor (ordinal outcome). Other ordinal items are also encoded as ordered factors to preserve survey scale meaning.
 
@@ -433,7 +454,7 @@ skimr::skim(df)
 ```
 :::
 
-### 2.3.3 Feature engineering: transparent proxy indices (for stratification/comparison)
+### 3.3.3 Feature engineering: transparent proxy indices (for stratification/comparison)
 
 -   SES_index: parents’ education (father + mother), used to form Low/Mid/High tertiles.
 
@@ -521,7 +542,7 @@ df2 <- df %>%
 
 A preliminary inspection shows negligible missingness across core variables (all \<1%), suggesting that downstream subgroup comparisons are unlikely to be biased by incomplete records.
 
-### 2.4.2 Baseline outcome check: GPA band counts (sanity check for ordinal outcome)
+### 3.4.2 Baseline outcome check: GPA band counts (sanity check for ordinal outcome)
 
 ::: panel-tabset
 # Plot
@@ -572,7 +593,7 @@ ggplot(gpa_counts, aes(x = gpa, y = prop)) +
 
 Baseline EDA shows that GPA is heavily concentrated in the mid bands. The majority of students fall within 2.5–\<3.2 (Fair), accounting for more than half of the sample, followed by 3.2–\<3.6 (Good) at roughly one-third. The lower bands (\<2.5) and the highest band (≥3.6) each represent only a small minority. This indicates an imbalanced but ordinal distribution centred around average-to-good performance, with relatively few extreme low or high outcomes. The pattern supports treating GPA band as an ordinal outcome and suggests that subsequent modelling should account for class imbalance while preserving the natural ranking structure.
 
-# 3. Analytical Visualisation
+# 4. Analytical Visualisation
 
 ## Common theme
 
@@ -1038,3 +1059,19 @@ The ridge plot presents a segmentation-style view of engagement across GPA bands
 6.  Moderation: Institutional support shows stronger alignment with GPA among poor-household students.
 
 7.  Segmentation: Engagement distributions shift with GPA, providing a profile-based lens for interventions.
+
+# 5. Conclusion
+
+This analysis examined structural, behavioural, and institutional factors associated with student learning outcomes using ordinal GPA bands as the outcome variable.
+
+Three key patterns emerge.
+
+First, academic performance is concentrated within mid-level GPA bands, suggesting that improvement is more realistically framed as incremental movement across adjacent ordinal categories rather than extreme performance shifts.
+
+Second, structural disparities are evident across socioeconomic and minority groups, with modest but consistent upward shifts in GPA associated with higher parental education and non-minority status. These findings highlight the role of background conditions in shaping academic outcomes.
+
+Third, behavioural engagement—particularly study time and overall engagement index—shows the most consistent and systematic association with GPA. In contrast, social media use demonstrates weaker structural separation.
+
+Institutional support shows mild alignment with GPA overall but appears less consistently associated among disadvantaged students, suggesting that support mechanisms may require targeted design to translate into effective academic gains.
+
+Overall, the findings suggest that engagement-building strategies and early structural support may provide the most actionable pathways for improving student learning outcomes within this population.
