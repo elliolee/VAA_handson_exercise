@@ -1,0 +1,15 @@
+---
+title: "Take-home Exercise 2"
+subtitle: "Exploring Factors Associated with Student Learning Outcomes"
+author: "Ligen"
+date: "February 11, 2026"
+date-modified: last-modified
+format:
+  html:
+    theme: simplex
+    toc: true
+    toc-depth: 3
+execute:
+  warning: false
+  message: false
+---
