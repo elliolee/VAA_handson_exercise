@@ -1,21 +1,77 @@
 ---
 title: "ISSS608 – Visual Analytics & Applications"
+toc: false
+page-layout: full
 ---
 
-About This Site
+::: {.homepage-intro}
+<div class="intro-text">
+  <p class="intro-label">SMU MITB · Course Portfolio</p>
+  <h1>ISSS608 – Visual Analytics & Applications</h1>
+  <p class="intro-summary">
+    This website documents my learning journey in ISSS608 through three main components:
+    guided hands-on exercises, take-home assignments, and the final group project.
+    Together, they reflect my development from foundational visualisation techniques
+    to interactive analytical storytelling using R, Quarto, and Shiny.
+  </p>
+</div>
+:::
 
-Welcome to my course portfolio for ISSS608 Visual Analytics & Applications at Singapore Management University.
+## Course Portfolio Overview
 
-This website documents my learning journey in visual analytics — from fundamental graphical principles to advanced analytical storytelling using R and interactive visualization tools.
+This course portfolio is organised into three parts:
 
-Throughout this course, I focus on transforming raw data into interpretable insights through:
+::: {.grid-section}
+::: {.feature-card}
+### Hands-on Exercise
 
--   Exploratory Data Analysis (EDA)
+This section captures the guided practical exercises completed throughout the course.
 
--   Statistical graphics design
+It includes work on data visualisation fundamentals, statistical graphics, geospatial methods,
+interactive techniques, and dashboard-related analytical workflows in R.
+:::
 
--   Interactive visualisation
+::: {.feature-card}
+### Take-home Exercise
 
--   Analytical narrative construction
+This section presents the individual take-home assignments, which place stronger emphasis on
+problem framing, design choices, interpretation, and analytical storytelling.
 
--   Reproducible workflows in R & Quarto
+These exercises demonstrate how visualisation can support both exploration and communication.
+:::
+
+::: {.feature-card}
+### Group Project
+
+This section links to the final group project developed for the course:
+**COFINFAD: Colombian Fintech Customer Analytics Dashboard**.
+
+The project integrates analytical design, interactivity, and storytelling through a web-based
+visual analytics application.
+
+[View Group Project Website](https://elliolee.github.io/ISSS608_VAA_ColombianFintech-project-website/){.project-link target="_blank"}
+:::
+:::
+
+## Learning Focus
+
+Across the semester, my work focused on five main areas:
+
+- **Exploratory Data Analysis (EDA)** for understanding structure, variation, and anomalies in data  
+- **Statistical graphics design** for clear and effective communication  
+- **Interactive visualisation** for user-driven exploration  
+- **Analytical storytelling** for turning results into meaningful narratives  
+- **Reproducible workflows in R and Quarto** for transparent and well-documented analysis  
+
+## Navigation Guide
+
+Use the top navigation bar to browse the three course components:
+
+- **Hands-on Exercise** for weekly guided practice  
+- **Take-home Exercise** for individual analytical assignments  
+- **Group Project** for the final project website  
+
+## Reflection
+
+This portfolio reflects not only the outputs produced in the course, but also my evolving understanding
+of visual analytics as a combination of analytical reasoning, visual design, interactivity, and structured communication.
