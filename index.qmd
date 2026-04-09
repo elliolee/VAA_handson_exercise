@@ -2,12 +2,14 @@
 title: "ISSS608 – Visual Analytics & Applications"
 toc: false
 page-layout: full
+title-block: false
 ---
+
+::: {.homepage-shell}
 
 ::: {.homepage-intro}
 <div class="intro-text">
-  <p class="intro-label">SMU MITB · Course Portfolio</p>
-  <h1>ISSS608 – Visual Analytics & Applications</h1>
+  <p class="intro-label">SMU MITB · COURSE PORTFOLIO</p>
   <p class="intro-summary">
     This website documents my learning journey in ISSS608 through three main components:
     guided hands-on exercises, take-home assignments, and the final group project.
@@ -57,21 +59,23 @@ visual analytics application.
 
 Across the semester, my work focused on five main areas:
 
-- **Exploratory Data Analysis (EDA)** for understanding structure, variation, and anomalies in data  
-- **Statistical graphics design** for clear and effective communication  
-- **Interactive visualisation** for user-driven exploration  
-- **Analytical storytelling** for turning results into meaningful narratives  
-- **Reproducible workflows in R and Quarto** for transparent and well-documented analysis  
+- **Exploratory Data Analysis (EDA)** for understanding structure, variation, and anomalies in data
+- **Statistical graphics design** for clear and effective communication
+- **Interactive visualisation** for user-driven exploration
+- **Analytical storytelling** for turning results into meaningful narratives
+- **Reproducible workflows in R and Quarto** for transparent and well-documented analysis
 
 ## Navigation Guide
 
 Use the top navigation bar to browse the three course components:
 
-- **Hands-on Exercise** for weekly guided practice  
-- **Take-home Exercise** for individual analytical assignments  
-- **Group Project** for the final project website  
+- **Hands-on Exercise** for weekly guided practice
+- **Take-home Exercise** for individual analytical assignments
+- **Group Project** for the final project website
 
 ## Reflection
 
 This portfolio reflects not only the outputs produced in the course, but also my evolving understanding
 of visual analytics as a combination of analytical reasoning, visual design, interactivity, and structured communication.
+
+:::
